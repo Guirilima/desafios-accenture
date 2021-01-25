@@ -1,7 +1,7 @@
 package test;
 
 import controller.MessageServiceForTest;
-import model.UsuarioEntity;
+import model.Usuario;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import service.UsuarioService;
@@ -26,7 +26,7 @@ public class UsuarioTest {
     //Exemplo em Aula
     @Test
     static void loginComprimentoTest() {
-        UsuarioEntity usuario = new UsuarioEntity();
+        Usuario usuario = new Usuario();
         usuario.setLogin("Guirilima");
 
         UsuarioService service = new UsuarioService();
@@ -36,7 +36,7 @@ public class UsuarioTest {
 
     @Test
     void loginComprimentoInvalidoTest() {
-        UsuarioEntity usuario = new UsuarioEntity();
+        Usuario usuario = new Usuario();
         usuario.setLogin("Guirilimae3erwrereerere2233234ere");
 
         UsuarioService service = new UsuarioService();

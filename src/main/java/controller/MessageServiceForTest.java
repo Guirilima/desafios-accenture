@@ -1,17 +1,17 @@
 package controller;
 
-import model.UsuarioEntity;
+import model.Usuario;
 
 public class MessageServiceForTest {
 
-    public static UsuarioEntity getCPF() {
-        UsuarioEntity usuario = new UsuarioEntity();
+    public static Usuario getCPF() {
+        Usuario usuario = new Usuario();
         usuario.setCpf("45029380841");
         return usuario;
     }
 
-    public static UsuarioEntity getApelido() {
-        UsuarioEntity usuario = new UsuarioEntity();
+    public static Usuario getApelido() {
+        Usuario usuario = new Usuario();
         usuario.setNome("Guilherme");
         return usuario;
     }

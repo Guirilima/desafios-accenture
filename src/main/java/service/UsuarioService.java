@@ -1,7 +1,7 @@
 package service;
 
 import Utils.TextoUtils;
-import model.UsuarioEntity;
+import model.Usuario;
 import repository.UsuarioRepository;
 
 import static java.util.Objects.nonNull;
@@ -14,7 +14,7 @@ public class UsuarioService {
 
     private UsuarioRepository rep = new UsuarioRepository();
 
-    public void incluir(UsuarioEntity usuarioEntity) throws IllegalAccessException {
+    public void incluir(Usuario usuarioEntity) throws IllegalAccessException {
 
         boolean comprimentoValido = TextoUtils.validaComprimento(usuarioEntity.getLogin(),20);
         if (!comprimentoValido) {

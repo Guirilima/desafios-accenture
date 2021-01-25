@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tab_usuario",uniqueConstraints = @UniqueConstraint(columnNames = "user", name = "uk_user"))
-public class UsuarioEntity {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +34,9 @@ public class UsuarioEntity {
         this.conta = conta;
     }
 
-    public UsuarioEntity(){}
+    public Usuario(){}
 
-    public UsuarioEntity(Integer id, String login, String senha, String nome, String cpf) {
+    public Usuario(Integer id, String login, String senha, String nome, String cpf) {
         this.id = id;
         this.login = login;
         this.senha = senha;
@@ -88,7 +88,7 @@ public class UsuarioEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UsuarioEntity that = (UsuarioEntity) o;
+        Usuario that = (Usuario) o;
         return Objects.equals(login, that.login) &&
                 Objects.equals(senha, that.senha) &&
                 Objects.equals(nome, that.nome) &&
