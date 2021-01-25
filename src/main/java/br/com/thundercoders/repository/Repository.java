@@ -10,5 +10,5 @@ public interface Repository<T> {
 
 	public T findById(Integer id);
 
-	public void update(T entity);
+	public void update(Integer id, T entity);
 }

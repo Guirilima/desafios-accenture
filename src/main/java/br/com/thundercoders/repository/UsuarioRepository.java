@@ -5,7 +5,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
-import br.com.thundercoders.model.UsuarioEntity;
+import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.utils.ConexaoFactory;
 
 public class UsuarioRepository {
@@ -15,8 +15,8 @@ public class UsuarioRepository {
         this.em = ConexaoFactory.getConexao();
     }
 
-    public UsuarioEntity buscar(Integer id) {
-        return em.find(UsuarioEntity.class, id);
+    public Usuario buscar(Integer id) {
+        return em.find(Usuario.class, id);
     }
 
     public boolean exists(String login) {
@@ -25,27 +25,27 @@ public class UsuarioRepository {
         return query.getResultList().size() != 0 ;
     }
 
-    public UsuarioEntity buscarByLogin(String login) {
+    public Usuario buscarByLogin(String login) {
         Query query = em.createQuery("SELECT tu FROM UsuarioEntity tu WHERE tu.login = :login"); //JPQL
         query.setParameter("login",login);
 
-        UsuarioEntity usuarioEntity = null;
+        Usuario usuarioEntity = null;
         try {
-            usuarioEntity = (UsuarioEntity) query.getSingleResult();
+            usuarioEntity = (Usuario) query.getSingleResult();
         }catch (NoResultException | NonUniqueResultException nre) {
             //usuarioEntity = null; // Irrelevante, pois ele já é null . . .
         }
         return usuarioEntity;
     }
 
-    public void incluir(UsuarioEntity usuarioEntity) {
+    public void incluir(Usuario usuarioEntity) {
 
         em.getTransaction().begin();
         em.persist(usuarioEntity);
         em.getTransaction().commit();
     }
 
-    public void alterar(UsuarioEntity usuarioEntity) {
+    public void alterar(Usuario usuarioEntity) {
 
         em.getTransaction().begin();
         em.merge(usuarioEntity); //Irá alterar um único objeto

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import br.com.thundercoders.controller.MessageServiceForTest;
-import br.com.thundercoders.model.UsuarioEntity;
+import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.service.UsuarioService;
 
 public class UsuarioTest {
@@ -29,7 +29,7 @@ public class UsuarioTest {
     //Exemplo em Aula
     @Test
     static void loginComprimentoTest() {
-        UsuarioEntity usuario = new UsuarioEntity();
+        Usuario usuario = new Usuario();
         usuario.setLogin("Guirilima");
 
         UsuarioService service = new UsuarioService();
@@ -39,7 +39,7 @@ public class UsuarioTest {
 
     @Test
     void loginComprimentoInvalidoTest() {
-        UsuarioEntity usuario = new UsuarioEntity();
+        Usuario usuario = new Usuario();
         usuario.setLogin("Guirilimae3erwrereerere2233234ere");
 
         UsuarioService service = new UsuarioService();

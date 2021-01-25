@@ -1,6 +1,6 @@
 package br.com.thundercoders.service;
 
-import br.com.thundercoders.model.UsuarioEntity;
+import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.repository.UsuarioRepository;
 import br.com.thundercoders.utils.TextoUtils;
 
@@ -12,7 +12,7 @@ public class UsuarioService {
 
     private UsuarioRepository rep = new UsuarioRepository();
 
-    public void incluir(UsuarioEntity usuarioEntity) throws IllegalAccessException {
+    public void incluir(Usuario usuarioEntity) throws IllegalAccessException {
 
         boolean comprimentoValido = TextoUtils.validaComprimento(usuarioEntity.getLogin(),20);
         if (!comprimentoValido) {
