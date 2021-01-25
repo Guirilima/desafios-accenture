@@ -1,6 +1,6 @@
 package br.com.thundercoders.bankline;
 import br.com.thundercoders.model.Conta;
-import br.com.thundercoders.model.UsuarioEntity;
+import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.repository.UsuarioRepository;
 import br.com.thundercoders.service.UsuarioService;
 
@@ -9,7 +9,7 @@ public class Application {
 
         System.out.println("Oiee");
 
-        UsuarioEntity usuarioEntity = new UsuarioEntity();
+        Usuario usuarioEntity = new Usuario();
         usuarioEntity.setLogin("Guirilima");
         usuarioEntity.setNome("Guilherme");
         usuarioEntity.setCpf("3434344");
@@ -19,7 +19,7 @@ public class Application {
         repository.incluir(usuarioEntity);
 
         //Buscando usuario pelo login
-        usuarioEntity = new UsuarioEntity();
+        usuarioEntity = new Usuario();
         usuarioEntity = repository.buscar(1);
 
         //Alterando Dados do Usuario
@@ -28,7 +28,7 @@ public class Application {
 
 
         //2 - PARTE DO TESTE
-        UsuarioEntity usuarioEntity2 = new UsuarioEntity();
+        Usuario usuarioEntity2 = new Usuario();
         usuarioEntity.setLogin("Guirilima2");
         usuarioEntity.setNome("Guilherme2");
         usuarioEntity.setCpf("34343");
@@ -43,7 +43,7 @@ public class Application {
 
 
         ///// TESTE COM CONTA
-        usuarioEntity = new UsuarioEntity();
+        usuarioEntity = new Usuario();
         usuarioEntity.setLogin("Guirilima2");
         usuarioEntity.setNome("Guilherme2");
         usuarioEntity.setCpf("34343");

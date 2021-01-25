@@ -1,30 +1,88 @@
 package br.com.thundercoders.model;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "tab_contas")
 @Embeddable
 public class Conta {
 
-    @Column(name = "conta_numero")
-    private String numeroConta ;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @Column(name = "conta_saldo")
-    private Double saldo;
+	@OneToOne
+	@JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private Usuario usuario;
 
-    public String getNumeroConta() {
-        return numeroConta;
-    }
+    @Column(name = "tipo", length = 8)
+    private String tipo;
 
-    public void setNumeroConta(String numeroConta) {
-        this.numeroConta = numeroConta;
-    }
+    @Column(name = "saldo")
+    private Float saldo;
 
-    public Double getSaldo() {
-        return saldo;
-    }
+    @Column(name = "num_cartao_credito")
+    private String numCartaoCredito;
+    
+    @Column(name = "nome_cartao_credito")
+    private String nomeCartaoCredito;
+    
+    @Column(name = "sigla_cartao_credito")
+    private String siglaCartaoCredito;
 
-    public void setSaldo(Double saldo) {
-        this.saldo = saldo;
-    }
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public Float getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Float saldo) {
+		this.saldo = saldo;
+	}
+
+	public String getNumCartaoCredito() {
+		return numCartaoCredito;
+	}
+
+	public void setNumCartaoCredito(String numCartaoCredito) {
+		this.numCartaoCredito = numCartaoCredito;
+	}
+
+	public String getNomeCartaoCredito() {
+		return nomeCartaoCredito;
+	}
+
+	public void setNomeCartaoCredito(String nomeCartaoCredito) {
+		this.nomeCartaoCredito = nomeCartaoCredito;
+	}
+
+	public String getSiglaCartaoCredito() {
+		return siglaCartaoCredito;
+	}
+
+	public void setSiglaCartaoCredito(String siglaCartaoCredito) {
+		this.siglaCartaoCredito = siglaCartaoCredito;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }
