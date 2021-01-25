@@ -1,13 +1,17 @@
 package br.com.thundercoders.bankline;
+import javax.persistence.EntityManager;
+
 import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.repository.UsuarioRepository;
 import br.com.thundercoders.service.UsuarioService;
+import br.com.thundercoders.utils.ConexaoFactory;
 
 public class Application {
     public static void main(String[] args) throws IllegalAccessException {
 
         System.out.println("Oiee");
+        EntityManager em = ConexaoFactory.getConexao();
 
         Usuario usuarioEntity = new Usuario();
         usuarioEntity.setLogin("Guirilima");
@@ -15,16 +19,16 @@ public class Application {
         usuarioEntity.setCpf("3434344");
         usuarioEntity.setSenha("1234");
 
-        UsuarioRepository repository = new UsuarioRepository();
-        repository.incluir(usuarioEntity);
+        UsuarioRepository repository = new UsuarioRepository(em);
+        repository.save(usuarioEntity);
 
         //Buscando usuario pelo login
         usuarioEntity = new Usuario();
-        usuarioEntity = repository.buscar(1);
+        usuarioEntity = repository.findById(1);
 
         //Alterando Dados do Usuario
         usuarioEntity.setNome("NOVO NOME");
-        repository.alterar(usuarioEntity);
+        repository.update(usuarioEntity);
 
 
         //2 - PARTE DO TESTE
@@ -35,8 +39,8 @@ public class Application {
         usuarioEntity.setSenha("4321");
 
         ///////////////////////
-        UsuarioService service = new UsuarioService();
-        service.incluir(usuarioEntity);
+        UsuarioService service = new UsuarioService(repository);
+        service.save(usuarioEntity);
 
 
 
@@ -53,6 +57,6 @@ public class Application {
         conta.setNumeroConta("232323");
         conta.setSaldo(11.1);
 
-        service.incluir(usuarioEntity);
+        service.save(usuarioEntity);
     }
 }

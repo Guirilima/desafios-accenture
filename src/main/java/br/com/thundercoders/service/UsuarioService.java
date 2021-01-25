@@ -1,32 +1,55 @@
 package br.com.thundercoders.service;
 
+import java.util.List;
+
 import br.com.thundercoders.model.Usuario;
+import br.com.thundercoders.repository.Repository;
 import br.com.thundercoders.repository.UsuarioRepository;
 import br.com.thundercoders.utils.TextoUtils;
 
-public class UsuarioService {
+public class UsuarioService implements Service<Usuario> {
 
-    public boolean loginComprimento(String login) {
-        return login.length() <= 20;
-    }
+	private UsuarioRepository rep;
 
-    private UsuarioRepository rep = new UsuarioRepository();
+	public UsuarioService(Repository<Usuario> rep) {
+		this.rep = (UsuarioRepository) rep;
+	}
 
-    public void incluir(Usuario usuarioEntity) throws IllegalAccessException {
+	public boolean loginComprimento(String login) {
+		return login.length() <= 20;
+	}
 
-        boolean comprimentoValido = TextoUtils.validaComprimento(usuarioEntity.getLogin(),20);
-        if (!comprimentoValido) {
-            throw new IllegalAccessException();
-        }
+	@Override
+	public Usuario save(Usuario entity) {
 
-        usuarioEntity = rep.buscarByLogin(usuarioEntity.getLogin());
+		boolean comprimentoValido = TextoUtils.validaComprimento(entity.getLogin(), 20);
+		if (!comprimentoValido) {
+			throw new RuntimeException("Tamanho inválido");
+		}
 
-        if ( rep.exists(usuarioEntity.getLogin() ))  //nonNull(usuarioEntity) ){
-        {
-            throw new IllegalStateException("Já existe um usuario com o login " + usuarioEntity.getLogin());
-        }
+		if (rep.exists(entity.getLogin())) // nonNull(usuarioEntity) ){
+		{
+			throw new IllegalStateException("Já existe um usuario com o login " + entity.getLogin());
+		}
 
-        rep.incluir(usuarioEntity);
+		return rep.save(entity);
+	}
 
-    }
+	@Override
+	public List<Usuario> findAll() {
+
+		return rep.findAll();
+	}
+
+	@Override
+	public Usuario findById(Integer id) {
+		return rep.findById(id);
+	}
+
+	@Override
+	public void update(Integer id, Usuario entity) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

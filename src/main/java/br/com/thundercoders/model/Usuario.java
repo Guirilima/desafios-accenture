@@ -4,99 +4,107 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tab_usuario",uniqueConstraints = @UniqueConstraint(columnNames = "user", name = "uk_user"))
+@Table(name = "tab_usuario", uniqueConstraints = @UniqueConstraint(columnNames = "user", name = "uk_user"))
 public class Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @Column(name = "user",length = 20)
-    private String login;
+	@Column(name = "user", length = 20)
+	private String login;
 
-    @Column(name = "password",length = 100,nullable = false)
-    private String senha;
+	@Column(name = "password", length = 100, nullable = false)
+	private String senha;
 
-    @Column(length = 50,nullable = false)
-    private String nome;
+	@Column(length = 50, nullable = false)
+	private String nome;
 
-    @Column(length = 12,nullable = false)
-    private String cpf;
+	@Column(length = 12, nullable = false)
+	private String cpf;
 
-    @Embedded
-    private Conta conta = new Conta();
+	@Embedded
+	private Conta conta = new Conta();
 
-    public Conta getConta() {
-        return conta;
-    }
+	public Conta getConta() {
+		return conta;
+	}
 
-    public void setConta(Conta conta) {
-        this.conta = conta;
-    }
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
 
-    public Usuario(){}
+	public Usuario() {
+	}
 
-    public Usuario(Integer id, String login, String senha, String nome, String cpf) {
-        this.id = id;
-        this.login = login;
-        this.senha = senha;
-        this.nome = nome;
-        this.cpf = cpf;
-    }
+	public Usuario(String login, String senha, String nome, String cpf) {
+		this.login = login;
+		this.senha = senha;
+		this.nome = nome;
+		this.cpf = cpf;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Usuario(Integer id, String login, String senha, String nome, String cpf) {
+		this.id = id;
+		this.login = login;
+		this.senha = senha;
+		this.nome = nome;
+		this.cpf = cpf;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getLogin() {
-        return login;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	public String getLogin() {
+		return login;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+	public String getSenha() {
+		return senha;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Usuario that = (Usuario) o;
-        return Objects.equals(login, that.login) &&
-                Objects.equals(senha, that.senha) &&
-                Objects.equals(nome, that.nome) &&
-                Objects.equals(cpf, that.cpf);
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(login, senha, nome, cpf);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Usuario that = (Usuario) o;
+		return Objects.equals(login, that.login) && Objects.equals(senha, that.senha) && Objects.equals(nome, that.nome)
+				&& Objects.equals(cpf, that.cpf);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(login, senha, nome, cpf);
+	}
 }
