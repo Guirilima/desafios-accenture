@@ -1,10 +1,8 @@
-import Utils.ConexaoFactory;
-import model.Conta;
-import model.UsuarioEntity;
+package br.com.thundercoders.bankline;
+import br.com.thundercoders.model.Conta;
+import br.com.thundercoders.model.UsuarioEntity;
 import repository.UsuarioRepository;
 import service.UsuarioService;
-
-import javax.persistence.EntityManager;
 
 public class Application {
     public static void main(String[] args) throws IllegalAccessException {

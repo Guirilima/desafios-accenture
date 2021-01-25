@@ -1,6 +1,6 @@
-package controller;
+package br.com.thundercoders.controller;
 
-import model.UsuarioEntity;
+import br.com.thundercoders.model.UsuarioEntity;
 
 public class MessageServiceForTest {
 

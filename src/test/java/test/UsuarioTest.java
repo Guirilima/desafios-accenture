@@ -1,7 +1,7 @@
 package test;
 
-import controller.MessageServiceForTest;
-import model.UsuarioEntity;
+import br.com.thundercoders.controller.MessageServiceForTest;
+import br.com.thundercoders.model.UsuarioEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import service.UsuarioService;

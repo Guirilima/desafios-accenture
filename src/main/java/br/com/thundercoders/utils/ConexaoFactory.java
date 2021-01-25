@@ -1,4 +1,4 @@
-package Utils;
+package br.com.thundercoders.utils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

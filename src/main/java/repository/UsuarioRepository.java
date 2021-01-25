@@ -1,12 +1,12 @@
 package repository;
 
-import Utils.ConexaoFactory;
-import model.UsuarioEntity;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
+
+import br.com.thundercoders.model.UsuarioEntity;
+import br.com.thundercoders.utils.ConexaoFactory;
 
 public class UsuarioRepository {
     private EntityManager em = null;

@@ -1,4 +1,4 @@
-package generica;
+package br.com.thundercoders.generica;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,7 @@
 package generica;
 
+import br.com.thundercoders.generica.ClasseGenerica;
+
 public class TestGenerico {
     public static void main(String[] args) {
         ClasseGenerica<A> cg = new ClasseGenerica(); //Agora aqui definimos que queremos trabalhar com o A

@@ -1,10 +1,8 @@
 package service;
 
 import Utils.TextoUtils;
-import model.UsuarioEntity;
+import br.com.thundercoders.model.UsuarioEntity;
 import repository.UsuarioRepository;
-
-import static java.util.Objects.nonNull;
 
 public class UsuarioService {
 

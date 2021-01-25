@@ -1,4 +1,4 @@
-package model;
+package br.com.thundercoders.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
