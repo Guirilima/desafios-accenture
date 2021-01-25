@@ -1,12 +1,15 @@
 package test;
 
-import br.com.thundercoders.controller.MessageServiceForTest;
-import br.com.thundercoders.model.UsuarioEntity;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import service.UsuarioService;
 
-import static org.junit.jupiter.api.Assertions.*;
+import br.com.thundercoders.controller.MessageServiceForTest;
+import br.com.thundercoders.model.UsuarioEntity;
+import br.com.thundercoders.service.UsuarioService;
 
 public class UsuarioTest {
 

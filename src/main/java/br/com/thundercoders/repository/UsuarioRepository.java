@@ -1,4 +1,4 @@
-package repository;
+package br.com.thundercoders.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
