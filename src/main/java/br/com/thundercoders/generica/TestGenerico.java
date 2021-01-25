@@ -1,6 +1,4 @@
-package generica;
-
-import br.com.thundercoders.generica.ClasseGenerica;
+package br.com.thundercoders.generica;
 
 public class TestGenerico {
     public static void main(String[] args) {

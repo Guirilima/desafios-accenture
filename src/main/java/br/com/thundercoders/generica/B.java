@@ -1,4 +1,4 @@
-package generica;
+package br.com.thundercoders.generica;
 
 public class B {
     public void metodo() {

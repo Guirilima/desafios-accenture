@@ -1,8 +1,8 @@
 package br.com.thundercoders.bankline;
 import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.UsuarioEntity;
-import repository.UsuarioRepository;
-import service.UsuarioService;
+import br.com.thundercoders.repository.UsuarioRepository;
+import br.com.thundercoders.service.UsuarioService;
 
 public class Application {
     public static void main(String[] args) throws IllegalAccessException {

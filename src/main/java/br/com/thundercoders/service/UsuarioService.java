@@ -1,8 +1,8 @@
-package service;
+package br.com.thundercoders.service;
 
-import Utils.TextoUtils;
 import br.com.thundercoders.model.UsuarioEntity;
-import repository.UsuarioRepository;
+import br.com.thundercoders.repository.UsuarioRepository;
+import br.com.thundercoders.utils.TextoUtils;
 
 public class UsuarioService {
 
