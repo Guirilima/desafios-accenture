@@ -13,6 +13,7 @@ public class UsuarioRepository implements Repository<Usuario> {
 	private EntityManager em;
 
 	public UsuarioRepository(EntityManager em) {
+		System.out.println("Construtor");
 		this.em = em;
 	}
 

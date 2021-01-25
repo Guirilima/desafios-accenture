@@ -4,10 +4,9 @@ import static org.junit.Assert.assertNotNull;
 
 import javax.persistence.EntityManager;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.thundercoders.model.LancamentoTipo;
 import br.com.thundercoders.model.PlanoConta;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.utils.ConexaoFactory;
@@ -18,7 +17,7 @@ class PlanoContaRepositoryTest {
 	private UsuarioRepository usuarioRepository;
 	private EntityManager em;
 
-	@Before
+	@BeforeEach
 	public void initialize() {
 		this.em = ConexaoFactory.getConexao();
 		this.repository = new PlanoContaRepository(em);
@@ -28,10 +27,8 @@ class PlanoContaRepositoryTest {
 	@Test
 	void salvarPlanoContasTest() {
 		Usuario usuario = usuarioRepository
-				.save(new Usuario("franklin-barreto@hotmail.com", "123456", "Franklin Barreto", "32545478956"));
-
-		usuarioRepository.save(usuario);
-		PlanoConta planoConta = new PlanoConta(usuario, LancamentoTipo.CREDITO, "Pagamento de salário");
+				.save(new Usuario("franklin-barreto", "12345", "Franklin Barreto", "12345678910"));
+		PlanoConta planoConta = new PlanoConta(usuario, "Pagamento de salário");
 		PlanoConta save = repository.save(planoConta);
 		assertNotNull(save.getId());
 	}

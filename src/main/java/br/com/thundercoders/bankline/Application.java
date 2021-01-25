@@ -10,7 +10,6 @@ import br.com.thundercoders.utils.ConexaoFactory;
 public class Application {
     public static void main(String[] args) throws IllegalAccessException {
 
-        System.out.println("Oiee");
         EntityManager em = ConexaoFactory.getConexao();
 
         Usuario usuarioEntity = new Usuario();
@@ -20,8 +19,9 @@ public class Application {
         usuarioEntity.setSenha("1234");
 
         UsuarioRepository repository = new UsuarioRepository(em);
-        repository.save(usuarioEntity);
-
+        Usuario usuario = repository.save(usuarioEntity);
+        System.out.println(usuario.getNome());
+/*
         //Buscando usuario pelo login
         usuarioEntity = new Usuario();
         usuarioEntity = repository.findById(1);
@@ -57,6 +57,6 @@ public class Application {
         conta.setNumeroConta("232323");
         conta.setSaldo(11.1);
 
-        service.save(usuarioEntity);
+        service.save(usuarioEntity);*/
     }
 }

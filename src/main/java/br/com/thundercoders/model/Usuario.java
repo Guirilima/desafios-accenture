@@ -1,7 +1,6 @@
 package br.com.thundercoders.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "tab_usuario", uniqueConstraints = @UniqueConstraint(columnNames = "user", name = "uk_user"))

@@ -17,9 +17,9 @@ public class PlanoContaRepository implements Repository<PlanoConta> {
 	@Override
 	public PlanoConta save(PlanoConta planoConta) {
 		em.getTransaction().begin();
-		planoConta = em.merge(planoConta);
+		PlanoConta planoContaSaved = em.merge(planoConta);
 		em.getTransaction().commit();
-		return planoConta;
+		return planoContaSaved;
 	}
 
 	@Override

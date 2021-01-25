@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.example</groupId>
+	<groupId>br.com.thundercoders</groupId>
 	<artifactId>sistema-cadastramento</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
@@ -87,6 +87,11 @@
 	</dependencies>
 
 	<build>
+	<resources>
+<resource>
+	<directory>src/main/resources</directory>
+</resource>
+	</resources>
 		<plugins>
 
 			<!-- Need at least 2.22.0 to support JUnit 5 -->

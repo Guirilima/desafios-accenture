@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ public class UsuarioTest {
 	private UsuarioRepository repository;
 	private UsuarioService service;
 
-	@Before
+	@BeforeEach
 	public void initialize() {
 		this.repository = new UsuarioRepository(ConexaoFactory.getConexao());
 		this.service = new UsuarioService(repository);
