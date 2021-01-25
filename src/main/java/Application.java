@@ -22,7 +22,7 @@ public class Application {
 
         //Buscando usuario pelo login
         usuarioEntity = new UsuarioEntity();
-        usuarioEntity = repository.buscar("Guirilima");
+        usuarioEntity = repository.buscar(1);
 
         //Alterando Dados do Usuario
         usuarioEntity.setNome("NOVO NOME");

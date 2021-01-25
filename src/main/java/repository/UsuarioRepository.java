@@ -15,8 +15,8 @@ public class UsuarioRepository {
         this.em = ConexaoFactory.getConexao();
     }
 
-    public UsuarioEntity buscar(String login) {
-        return em.find(UsuarioEntity.class, login);
+    public UsuarioEntity buscar(Integer id) {
+        return em.find(UsuarioEntity.class, id);
     }
 
     public boolean exists(String login) {
