@@ -15,11 +15,14 @@ public class Conta {
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
-    @Column(name = "tipo", length = 8)
+    @Column(name = "tipo")
     private String tipo;
 
+    @Column(name = "numero")
+    private String numero;
+    
     @Column(name = "saldo")
-    private Float saldo;
+    private Double saldo;
 
     @Column(name = "num_cartao_credito")
     private String numCartaoCredito;
@@ -46,11 +49,19 @@ public class Conta {
 		this.tipo = tipo;
 	}
 
-	public Float getSaldo() {
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+	
+	public Double getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(Float saldo) {
+	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
 
