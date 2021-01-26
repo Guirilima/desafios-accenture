@@ -33,8 +33,8 @@ public class UsuarioService {
 		}
 
 		usuarioRepository.incluir(usuarioEntity);
-	}
-
+	}	
+	
 	public Usuario findById(Integer id) {
 		Optional<Usuario> usuario = Optional.of(usuarioRepository.findById(id));
 		if (!usuario.isPresent()) {
