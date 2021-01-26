@@ -3,8 +3,6 @@ package br.com.thundercoders.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tab_contas")
-@Embeddable
 public class Conta {
 
 	@Id
@@ -13,25 +11,28 @@ public class Conta {
 
 	@OneToOne
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id")
-    private Usuario usuario;
+	private Usuario usuario;
 
-    @Column(name = "tipo")
-    private String tipo;
+	@Column(name = "tipo")
+	private String tipo;
 
-    @Column(name = "numero")
-    private String numero;
-    
-    @Column(name = "saldo")
-    private Double saldo;
+	@Column(name = "numero")
+	private String numero;
 
-    @Column(name = "num_cartao_credito")
-    private String numCartaoCredito;
-    
-    @Column(name = "nome_cartao_credito")
-    private String nomeCartaoCredito;
-    
-    @Column(name = "sigla_cartao_credito")
-    private String siglaCartaoCredito;
+	@Column(name = "saldo")
+	private Double saldo;
+	
+	
+	public Conta() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Conta(Usuario usuario, String tipo, String numero, Double saldo) {
+		this.usuario = usuario;
+		this.tipo = tipo;
+		this.numero = numero;
+		this.saldo = saldo;
+	}
 
 	public Integer getId() {
 		return id;
@@ -56,7 +57,7 @@ public class Conta {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	
+
 	public Double getSaldo() {
 		return saldo;
 	}
@@ -65,34 +66,10 @@ public class Conta {
 		this.saldo = saldo;
 	}
 
-	public String getNumCartaoCredito() {
-		return numCartaoCredito;
-	}
-
-	public void setNumCartaoCredito(String numCartaoCredito) {
-		this.numCartaoCredito = numCartaoCredito;
-	}
-
-	public String getNomeCartaoCredito() {
-		return nomeCartaoCredito;
-	}
-
-	public void setNomeCartaoCredito(String nomeCartaoCredito) {
-		this.nomeCartaoCredito = nomeCartaoCredito;
-	}
-
-	public String getSiglaCartaoCredito() {
-		return siglaCartaoCredito;
-	}
-
-	public void setSiglaCartaoCredito(String siglaCartaoCredito) {
-		this.siglaCartaoCredito = siglaCartaoCredito;
-	}
-	
 	public Usuario getUsuario() {
 		return usuario;
 	}
-	
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}

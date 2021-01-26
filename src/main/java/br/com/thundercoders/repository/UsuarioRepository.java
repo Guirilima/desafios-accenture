@@ -1,54 +1,73 @@
 package br.com.thundercoders.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
 import br.com.thundercoders.model.Usuario;
-import br.com.thundercoders.utils.ConexaoFactory;
 
-public class UsuarioRepository {
-    private EntityManager em = null;
+public class UsuarioRepository implements RepositoryI<Usuario> {
+	private EntityManager em;
 
-    public UsuarioRepository() {
-        this.em = ConexaoFactory.getConexao();
-    }
+	public UsuarioRepository(EntityManager em) {
+		this.em = em;
+	}
 
-    public Usuario buscar(Integer id) {
-        return em.find(Usuario.class, id);
-    }
+	public boolean exists(String login) {
+		Query query = em.createQuery("SELECT tu FROM Usuario tu WHERE tu.login = :login"); // JPQL
+		query.setParameter("login", login);
+		return query.getResultList().size() != 0;
+	}
 
-    public boolean exists(String login) {
-        Query query = em.createQuery("SELECT tu FROM UsuarioEntity tu WHERE tu.login = :login"); //JPQL
-        query.setParameter("login",login);
-        return query.getResultList().size() != 0 ;
-    }
+	public Usuario findByLogin(String login) {
+		Query query = em.createQuery("SELECT tu FROM Usuario tu WHERE tu.login = :login"); // JPQL
+		query.setParameter("login", login);
 
-    public Usuario buscarByLogin(String login) {
-        Query query = em.createQuery("SELECT tu FROM UsuarioEntity tu WHERE tu.login = :login"); //JPQL
-        query.setParameter("login",login);
+		Usuario usuariousuario = null;
+		try {
+			usuariousuario = (Usuario) query.getSingleResult();
+		} catch (NoResultException | NonUniqueResultException nre) {
+			// usuariousuario = null; // Irrelevante, pois ele já é null . . .
+		}
+		return usuariousuario;
+	}
 
-        Usuario usuarioEntity = null;
-        try {
-            usuarioEntity = (Usuario) query.getSingleResult();
-        }catch (NoResultException | NonUniqueResultException nre) {
-            //usuarioEntity = null; // Irrelevante, pois ele já é null . . .
-        }
-        return usuarioEntity;
-    }
+	public void incluir(Usuario usuario) {
 
-    public void incluir(Usuario usuarioEntity) {
+	}
 
-        em.getTransaction().begin();
-        em.persist(usuarioEntity);
-        em.getTransaction().commit();
-    }
+	public void alterar(Usuario usuario) {
+	}
 
-    public void alterar(Usuario usuarioEntity) {
+	@Override
+	public Usuario save(Usuario usuario) {
 
-        em.getTransaction().begin();
-        em.merge(usuarioEntity); //Irá alterar um único objeto
-        em.getTransaction().commit();
-    }
+		em.getTransaction().begin();
+		Usuario user = em.merge(usuario);
+		em.getTransaction().commit();
+		return user;
+	}
+
+	@Override
+	public void update(Usuario usuario) {
+
+		em.getTransaction().begin();
+		em.merge(usuario); // Irá alterar um único objeto
+		em.getTransaction().commit();
+
+	}
+
+	@Override
+	public List<Usuario> findAll() {
+		
+		return em.createQuery("Select u from Usuario u",Usuario.class).getResultList();
+	}
+
+	@Override
+	public Usuario findById(Integer id) {
+		return em.find(Usuario.class, id);
+	}
 }

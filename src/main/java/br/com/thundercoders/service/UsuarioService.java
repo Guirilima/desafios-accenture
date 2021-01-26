@@ -19,7 +19,7 @@ public class UsuarioService {
             throw new IllegalAccessException();
         }
 
-        usuarioEntity = rep.buscarByLogin(usuarioEntity.getLogin());
+        usuarioEntity = rep.findByLogin(usuarioEntity.getLogin());
 
         if ( rep.exists(usuarioEntity.getLogin() ))  //nonNull(usuarioEntity) ){
         {
