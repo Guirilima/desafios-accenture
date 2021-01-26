@@ -5,6 +5,8 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="MY_PU">
 		<class>br.com.thundercoders.model.Usuario</class>
+		<class>br.com.thundercoders.model.PlanoConta</class>
+		<class>br.com.thundercoders.model.Conta</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />

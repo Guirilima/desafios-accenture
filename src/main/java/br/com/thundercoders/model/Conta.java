@@ -1,30 +1,55 @@
 package br.com.thundercoders.model;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Embeddable
+@Entity
 public class Conta {
 
-    @Column(name = "conta_numero")
-    private String numeroConta ;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @Column(name = "conta_saldo")
-    private Double saldo;
+	@Column(name = "conta_numero")
+	private String numeroConta;
 
-    public String getNumeroConta() {
-        return numeroConta;
-    }
+	@Column(name = "conta_saldo")
+	private Double saldo;
 
-    public void setNumeroConta(String numeroConta) {
-        this.numeroConta = numeroConta;
-    }
+	public String getNumeroConta() {
+		return numeroConta;
+	}
 
-    public Double getSaldo() {
-        return saldo;
-    }
+	public void setNumeroConta(String numeroConta) {
+		this.numeroConta = numeroConta;
+	}
 
-    public void setSaldo(Double saldo) {
-        this.saldo = saldo;
-    }
+	public Double getSaldo() {
+		return saldo;
+	}
+
+	public boolean deposita(Double valor) {
+		if (valor < 0) {
+			throw new IllegalArgumentException("O valor não pode ser negativo");
+		}
+		saldo += valor;
+		return true;
+	}
+
+	public boolean saca(Double valor) {
+		if (saldo < valor) {
+			throw new RuntimeException("Valor de saque maior que saldo");
+		}
+		saldo -= valor;
+		return true;
+	}
+
+	public void transfere(Double valor, Conta contaDestino) {
+		saca(valor);
+		contaDestino.deposita(valor);
+	}
+
 }
