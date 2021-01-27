@@ -49,6 +49,10 @@ public class Lancamento {
 		this.lancamentoTipo = lancamentoTipo;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
 	public Integer getId() {
 		return id;
 	}
