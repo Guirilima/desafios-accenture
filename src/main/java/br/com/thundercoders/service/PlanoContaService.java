@@ -20,4 +20,9 @@ public class PlanoContaService {
 		return planoContaRepository.save(new PlanoConta(usuario, dtoPlanoConta.getDescricao()));
 	}
 
+	public PlanoConta findById(Integer id) {
+		// TODO Auto-generated method stub
+		return planoContaRepository.findById(id);
+	}
+
 }

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.thundercoders.model.Conta;
+import br.com.thundercoders.model.ContaCorrente;
 import br.com.thundercoders.model.Lancamento;
 import br.com.thundercoders.model.LancamentoTipo;
 import br.com.thundercoders.model.PlanoConta;
@@ -37,7 +38,7 @@ public class LancamentoRepositoryTest {
 	public void salvaLancamentoTest() {
 		Usuario usuario = uRepository.save(new Usuario("franklin-barreto2", "12345", "Franklin Barreto", "12345678910"));
 		PlanoConta planoConta = pRepository.save(new PlanoConta(usuario, "Farra"));
-		Conta conta =  cRepository.save(new Conta(usuario, "CC", "2014", 200.0));
+		Conta conta =  cRepository.save(new ContaCorrente(usuario, "CC", "2014", 200.0));
 		Lancamento lancamento = repository
 				.save(new Lancamento(conta, planoConta, 20.0, "Cerveja", LocalDateTime.now(), LancamentoTipo.DEBITO));
 		assertEquals(1, lancamento.getId());
