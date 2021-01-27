@@ -16,6 +16,10 @@ public class UsuarioRepository implements RepositoryI<Usuario> {
 		this.em = em;
 	}
 
+	public UsuarioRepository() {
+
+	}
+
 	public boolean exists(String login) {
 		Query query = em.createQuery("SELECT tu FROM Usuario tu WHERE tu.login = :login"); // JPQL
 		query.setParameter("login", login);
