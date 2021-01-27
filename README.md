@@ -111,7 +111,7 @@
     ```
     
     
-  ## Menbros
+  ## Membros
   
   - Danilo Marcondes,
   - Guilherme Lima,
