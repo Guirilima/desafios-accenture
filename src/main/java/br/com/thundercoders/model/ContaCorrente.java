@@ -15,7 +15,6 @@ public class ContaCorrente extends Conta {
 	@Column(name = "saldo")
 	private Double saldo;
 	
-	
 	public ContaCorrente() {
 		// TODO Auto-generated constructor stub
 	}

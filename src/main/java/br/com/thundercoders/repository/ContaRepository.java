@@ -37,7 +37,7 @@ public class ContaRepository implements RepositoryI<Conta> {
 	@Override
 	public Conta findById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return em.find(Conta.class, id);
 	}
 
 }
