@@ -47,6 +47,7 @@ public class Lancamento extends EntidadeBase {
 		this.lancamentoTipo = lancamentoTipo;
 	}
 
+
 	public Double getValor() {
 		return valor;
 	}
@@ -57,6 +58,10 @@ public class Lancamento extends EntidadeBase {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public String getDescricao() {
+		return descricao;
 	}
 
 	public LocalDateTime getDataHora() {
