@@ -1,6 +1,6 @@
 package br.com.thundercoders.repository;
 
-import static java.util.Objects.nonNull;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,8 +9,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.ContaCorrente;
@@ -20,6 +25,8 @@ import br.com.thundercoders.model.PlanoConta;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.utils.ConexaoFactory;
 
+@TestInstance(Lifecycle.PER_CLASS)
+@TestMethodOrder(OrderAnnotation.class)
 public class LancamentoRepositoryTest {
 
 	private LancamentoRepository repository;
@@ -27,57 +34,55 @@ public class LancamentoRepositoryTest {
 	private PlanoContaRepository pRepository;
 	private ContaRepository cRepository;
 	private EntityManager em;
+	private Usuario usuario;
+	private Conta conta;
 
-	@BeforeEach
+	@BeforeAll
 	public void initialize() {
 		this.em = ConexaoFactory.getConexao();
 		this.repository = new LancamentoRepository(em);
 		this.pRepository = new PlanoContaRepository(em);
 		this.uRepository = new UsuarioRepository(em);
 		this.cRepository = new ContaRepository(em);
+		this.usuario = uRepository.save(new Usuario("franklin-barreto2", "12345", "Franklin Barreto", "12345678910"));
+		this.conta = cRepository.save(new ContaCorrente(usuario, "CC", "2014", 200.0));
 	}
 
 	@Test
+	@Order(1)
 	public void salvaLancamentoTest() {
-		Usuario usuario = uRepository.save(new Usuario("franklin-barreto2", "12345", "Franklin Barreto", "12345678910"));
 		PlanoConta planoConta = pRepository.save(new PlanoConta(usuario, "Farra"));
-		Conta conta =  cRepository.save(new ContaCorrente(usuario, "CC", "2014", 200.0));
-		Lancamento lancamento = repository
-				.save(new Lancamento(conta, planoConta, 20.0, "Cerveja", LocalDateTime.now(), LancamentoTipo.DESPESA));
+		Lancamento lancamento = repository.save(new Lancamento(conta, planoConta, 20.0, "Cerveja",
+				LocalDateTime.of(2020, 1, 1, 00, 00), LancamentoTipo.DESPESA));
 		assertEquals(1, lancamento.getId());
 	}
 
 	@Test
+	@Order(2)
 	public void buscarLancamentoTest() {
 
 		Lancamento lancamento = repository.findById(1);
-		assertTrue( nonNull(lancamento) );
+		assertNotNull(lancamento);
 	}
 
 	@Test
+	@Order(3)
 	public void buscarLancamentosPorIdContaTest() {
 
-		List<Lancamento> lancamentos = repository.findByIdConta(3);
+		List<Lancamento> lancamentos = repository.findByIdConta(conta.getId());
 
-		for (Lancamento l : lancamentos) {
-			System.out.println(String.format("ID: %d , VALOR: %.2f , DESCRIÇÂO: %s",l.getId(),l.getValor(),l.getDescricao()));
-		}
-
-		assertTrue( lancamentos.size() > 0 );
+		assertTrue(lancamentos.size() > 0);
 	}
 
 	@Test
+	@Order(4)
 	public void buscarLancamentosPorPeriodoEidContaTest() {
 
-		List<Lancamento> lancamentos = repository.findByPeriod(3,
-				LocalDateTime.of(2020,1,1,00,00),	//Data Inicio
-				LocalDateTime.of(2020,1,13,00,00));//Data Final
+		List<Lancamento> lancamentos = repository.findByPeriod(conta.getId(), LocalDateTime.of(2020, 1, 1, 00, 00), // Data
+																													// Inicio
+				LocalDateTime.of(2020, 1, 13, 00, 00));// Data Final
 
-		for (Lancamento l : lancamentos) {
-			System.out.println(String.format("ID: %d , VALOR: %.2f , DESCRIÇÂO: %s",l.getId(),l.getValor(),l.getDescricao()));
-		}
-
-		assertTrue( lancamentos.size() > 0 );
+		assertTrue(lancamentos.size() > 0);
 	}
 
 }

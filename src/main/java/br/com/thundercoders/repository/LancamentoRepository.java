@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.thundercoders.model.Lancamento;
 
@@ -45,7 +45,8 @@ public class LancamentoRepository extends RepositoryImpl<Lancamento, Integer> {
 
 	// Irá buscar todos os lançamentos encontrado pelo idConta informado
 	public List<Lancamento> findByIdConta(Integer idConta) {
-		Query query = em.createQuery("Select l from Lancamento l where l.conta.id = :idConta");
+		TypedQuery<Lancamento> query = em.createQuery("Select l from Lancamento l where l.conta.id = :idConta",
+				Lancamento.class);
 
 		query.setParameter("idConta", idConta);
 
@@ -55,10 +56,8 @@ public class LancamentoRepository extends RepositoryImpl<Lancamento, Integer> {
 	// Irá buscar todos os lançamentos encontrado pelo idConta e Periodo informado
 	public List<Lancamento> findByPeriod(Integer idConta, LocalDateTime dataInicial, LocalDateTime dataFinal) {
 
-		// return em.createQuery("Select l from Lancamento l",
-		// Lancamento.class).getResultList();
-		Query query = em.createQuery("Select l from Lancamento l where l.conta.id = :idConta "
-				+ "and l.dataHora between :dataInicial and :dataFinal",Lancamento.class);
+		TypedQuery<Lancamento> query = em.createQuery("Select l from Lancamento l where l.conta.id = :idConta "
+				+ "and l.dataHora between :dataInicial and :dataFinal", Lancamento.class);
 
 		query.setParameter("idConta", idConta);
 		query.setParameter("dataInicial", dataInicial);
