@@ -3,18 +3,17 @@ package br.com.thundercoders.service;
 import java.util.Optional;
 
 import br.com.thundercoders.model.Conta;
-import br.com.thundercoders.repository.ContaRepository;
+import br.com.thundercoders.repository.RepositoryImpl;
 
-public class ContaService {
+public class ContaService extends ServiceImpl<Conta> {
 
-	private ContaRepository contaRepository;
+	public ContaService(RepositoryImpl<Conta, Integer> contaRepository) {
 
-	public ContaService(ContaRepository contaRepository) {
-		this.contaRepository = contaRepository;
+		super(contaRepository);
 	}
 
 	public Conta findById(Integer id) {
-		Optional<Conta> conta = Optional.of(contaRepository.findById(id));
+		Optional<Conta> conta = Optional.of(repository.findById(id));
 		if (!conta.isPresent()) {
 			throw new RuntimeException("Conta inexistente");
 		}

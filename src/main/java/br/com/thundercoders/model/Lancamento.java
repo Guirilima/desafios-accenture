@@ -4,18 +4,12 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Lancamento {
+public class Lancamento extends EntidadeBase {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
 
 	@ManyToOne
 	@JoinColumn(name = "id_conta", referencedColumnName = "id")
@@ -49,13 +43,6 @@ public class Lancamento {
 		this.lancamentoTipo = lancamentoTipo;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public Double getValor() {
 		return valor;

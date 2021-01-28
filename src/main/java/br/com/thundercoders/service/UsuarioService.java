@@ -3,15 +3,17 @@ package br.com.thundercoders.service;
 import java.util.Optional;
 
 import br.com.thundercoders.model.Usuario;
+import br.com.thundercoders.repository.RepositoryI;
 import br.com.thundercoders.repository.UsuarioRepository;
 import br.com.thundercoders.utils.TextoUtils;
 
-public class UsuarioService {
+public class UsuarioService extends ServiceImpl<Usuario>{
 
 	private UsuarioRepository usuarioRepository;
 
-	public UsuarioService(UsuarioRepository usuarioRepository) {
-		this.usuarioRepository = usuarioRepository;
+	public UsuarioService(RepositoryI<Usuario, Integer> usuarioRepository) {
+		super(usuarioRepository);
+		this.usuarioRepository = (UsuarioRepository) usuarioRepository;
 	}
 
 	public boolean loginComprimento(String login) {
@@ -32,7 +34,7 @@ public class UsuarioService {
 			throw new IllegalStateException("Já existe um usuario com o login " + usuarioEntity.getLogin());
 		}
 
-		usuarioRepository.incluir(usuarioEntity);
+		usuarioRepository.save(usuarioEntity);
 	}	
 	
 	public Usuario findById(Integer id) {
