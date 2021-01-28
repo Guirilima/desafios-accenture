@@ -1,9 +1,8 @@
-package br.com.thundercoders.repository;
+package br.com.thundercoders.service;
 
-import java.io.Serializable;
 import java.util.List;
 
-public interface RepositoryI<T, PK extends Serializable> {
+public interface ServiceI<T> {
 
 	public T save(T entity);
 
@@ -12,4 +11,5 @@ public interface RepositoryI<T, PK extends Serializable> {
 	public List<T> findAll();
 
 	public T findById(Integer id);
+
 }

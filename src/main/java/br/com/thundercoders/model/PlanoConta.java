@@ -3,11 +3,7 @@ package br.com.thundercoders.model;
 import javax.persistence.*;
 
 @Entity
-public class PlanoConta {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+public class PlanoConta extends EntidadeBase {
 
 	@ManyToOne
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id")
@@ -23,14 +19,6 @@ public class PlanoConta {
 	public PlanoConta(Usuario usuario, String descricao) {
 		this.usuario = usuario;
 		this.descricao = descricao;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getDescricao() {
