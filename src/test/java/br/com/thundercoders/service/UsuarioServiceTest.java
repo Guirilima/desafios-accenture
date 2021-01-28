@@ -43,13 +43,20 @@ public class UsuarioServiceTest {
 
 	@Test
 	@Order(2)
+	public void salvaUsuario2() throws IllegalAccessException {
+		Usuario usuario = this.usuarioService.save(new Usuario("igor.shimauti", "56789", "Igor Shimauti", "36285117802"));
+		assertNotNull(usuario);
+	}
+	
+	@Test
+	@Order(3)
 	public void buscarPorId() {
 		Usuario usuario = this.usuarioService.findById(1);
 		assertNotNull(usuario);
 	}
 
 	@Test
-	@Order(3)
+	@Order(4)
 	public void buscarTodos() {
 		List<Usuario> usuarios = this.usuarioService.findAll();
 		assertTrue(usuarios.size() > 0);

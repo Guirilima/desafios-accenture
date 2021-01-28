@@ -14,7 +14,7 @@ public class Lancamento extends EntidadeBase {
 	@ManyToOne
 	@JoinColumn(name = "id_conta", referencedColumnName = "id")
 	private Conta conta;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "id_plano_conta", referencedColumnName = "id")
 	private PlanoConta planoConta;
@@ -30,6 +30,10 @@ public class Lancamento extends EntidadeBase {
 
 	private LancamentoTipo lancamentoTipo;
 
+	@ManyToOne
+	@JoinColumn(name = "id_conta_destino", referencedColumnName = "id")
+	private Conta contaDestino;
+		
 	public Lancamento() {
 	}	
 	
@@ -42,7 +46,6 @@ public class Lancamento extends EntidadeBase {
 		this.dataHora = dataHora;
 		this.lancamentoTipo = lancamentoTipo;
 	}
-
 
 	public Double getValor() {
 		return valor;
