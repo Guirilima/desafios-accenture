@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import br.com.thundercoders.model.PlanoConta;
@@ -25,12 +26,20 @@ class PlanoContaRepositoryTest {
 	}
 
 	@Test
+	@Order(1)
 	void salvarPlanoContasTest() {
-		Usuario usuario = usuarioRepository
-				.save(new Usuario("franklin-barreto3", "12345", "Franklin Barreto", "12345678910"));
+		Usuario usuario = usuarioRepository.findById(1);
 		PlanoConta planoConta = new PlanoConta(usuario, "Pagamento de salário");
 		PlanoConta save = repository.save(planoConta);
 		assertNotNull(save.getId());
 	}
 
+	@Test
+	@Order(2)
+	void salvarPlanoContasTest2() {
+		Usuario usuario = usuarioRepository.findById(2);
+		PlanoConta planoConta = new PlanoConta(usuario, "Pagamento de salário");
+		PlanoConta save = repository.save(planoConta);
+		assertNotNull(save.getId());
+	}
 }

@@ -30,8 +30,9 @@ public class RepositoryImpl<T, PK extends Serializable> implements RepositoryI<T
 
 	@Override
 	public void update(T entity) {
-		// TODO Auto-generated method stub
-
+		em.getTransaction().begin();
+		em.merge(entity);
+		em.getTransaction().commit();
 	}
 
 	@Override

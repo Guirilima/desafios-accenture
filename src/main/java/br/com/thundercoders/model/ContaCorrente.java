@@ -1,9 +1,11 @@
 package br.com.thundercoders.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@PrimaryKeyJoinColumn(name="id")
+@PrimaryKeyJoinColumn(name = "id")
 public class ContaCorrente extends Conta {
 
 	@Column(name = "tipo")
@@ -14,7 +16,7 @@ public class ContaCorrente extends Conta {
 
 	@Column(name = "saldo")
 	private Double saldo;
-	
+
 	public ContaCorrente() {
 		// TODO Auto-generated constructor stub
 	}
@@ -42,11 +44,24 @@ public class ContaCorrente extends Conta {
 		this.numero = numero;
 	}
 
+	@Override
 	public Double getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(Double saldo) {
-		this.saldo = saldo;
+	@Override
+	public void debitar(Double valor) {
+		this.saldo -= valor;
+	}
+	
+	@Override
+	public void creditar(Double valor) {
+		this.saldo += valor;
+	}
+	
+	@Override
+	public void transferir(Double valor,Conta contaDestino) {
+		this.debitar(valor);
+		contaDestino.creditar(valor);
 	}
 }

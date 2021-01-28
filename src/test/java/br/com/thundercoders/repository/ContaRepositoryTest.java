@@ -11,7 +11,7 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.ContaCorrente;
-import br.com.thundercoders.model.LancamentoTipo;
+import br.com.thundercoders.model.ContaTipo;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.service.UsuarioService;
 import br.com.thundercoders.utils.ConexaoFactory;
@@ -34,10 +34,8 @@ public class ContaRepositoryTest {
 
 	@Test
 	public void salvaConta() {
-		Usuario usuario = usuarioService
-				.save(new Usuario("franklin-barreto87", "125478", "Franklin Barreto", "78914525478"));
-		Conta conta = contaRepository
-				.save(new ContaCorrente(usuario, LancamentoTipo.RECEITA.toString(), "124-9", 200.0));
+		Usuario usuario = usuarioService.save(new Usuario("joao.joaquim","123456", "joao", "1234567890"));
+		Conta conta = contaRepository.save(new ContaCorrente(usuario, ContaTipo.CORRENTE.toString(), "124-9", 200.0));
 		assertNotNull(conta);
 	}
 }

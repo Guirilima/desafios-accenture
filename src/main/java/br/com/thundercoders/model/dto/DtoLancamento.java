@@ -7,6 +7,7 @@ import br.com.thundercoders.model.LancamentoTipo;
 public class DtoLancamento {
 
 	private Integer contaId;
+	private Integer contaDestinoId;
 	private Integer planoContaId;
 	private Double valor;
 	private String descricao;
@@ -23,8 +24,23 @@ public class DtoLancamento {
 		this.lancamentoTipo = lancamentoTipo;
 	}
 
+	public DtoLancamento(Integer contaId, Integer contaDestinoId, Integer planoContaId, Double valor, String descricao,
+			LocalDateTime dataHora, LancamentoTipo lancamentoTipo) {
+		this.contaId = contaId;
+		this.contaDestinoId = contaDestinoId;
+		this.planoContaId = planoContaId;
+		this.valor = valor;
+		this.descricao = descricao;
+		this.dataHora = dataHora;
+		this.lancamentoTipo = lancamentoTipo;
+	}
+
 	public Integer getContaId() {
 		return contaId;
+	}
+
+	public Integer getContaDestinoId() {
+		return contaDestinoId;
 	}
 
 	public Integer getPlanoContaId() {
