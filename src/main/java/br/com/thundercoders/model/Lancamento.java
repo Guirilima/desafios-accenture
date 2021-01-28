@@ -87,4 +87,11 @@ public class Lancamento extends EntidadeBase {
 		return lancamentoTipo;
 	}
 
+	public Conta getContaDestino() {
+		return contaDestino;
+	}
+	
+	public void setContaDestino(Conta contaDestino) {
+		this.contaDestino = contaDestino;
+	}
 }

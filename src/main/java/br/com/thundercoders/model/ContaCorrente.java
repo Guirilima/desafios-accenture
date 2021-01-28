@@ -1,6 +1,8 @@
 package br.com.thundercoders.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
@@ -50,17 +52,16 @@ public class ContaCorrente extends Conta {
 	@Override
 	public void debitar(Double valor) {
 		this.saldo -= valor;
-		System.out.println("Valor do saldo "+saldo);
 	}
 	
 	@Override
 	public void creditar(Double valor) {
 		this.saldo += valor;
-		System.out.println("Valor do saldo "+saldo);
 	}
 	
 	@Override
-	public void transferir(Double valor) {
-		System.out.println("Valor do saldo "+saldo);
+	public void transferir(Double valor,Conta contaDestino) {
+		this.debitar(valor);
+		contaDestino.creditar(valor);
 	}
 }

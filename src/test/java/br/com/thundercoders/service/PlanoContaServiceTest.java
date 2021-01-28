@@ -2,15 +2,20 @@ package br.com.thundercoders.service;
 
 import javax.persistence.EntityManager;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import br.com.thundercoders.model.dto.DtoPlanoConta;
 import br.com.thundercoders.repository.PlanoContaRepository;
 import br.com.thundercoders.repository.UsuarioRepository;
 import br.com.thundercoders.utils.ConexaoFactory;
-
+@TestInstance(Lifecycle.PER_CLASS)
+@TestMethodOrder(OrderAnnotation.class)
 public class PlanoContaServiceTest {
 
 	private PlanoContaService planoContaService;
@@ -20,7 +25,7 @@ public class PlanoContaServiceTest {
 	private EntityManager em;
 	
 
-	@BeforeEach
+	@BeforeAll
 	public void initialize() {
 		this.em = ConexaoFactory.getConexao();
 		this.repository = new PlanoContaRepository(em);

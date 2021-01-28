@@ -24,7 +24,7 @@ public abstract class Conta extends EntidadeBase {
 
 	public abstract void debitar(Double valor);
 	public abstract void creditar(Double valor);
-	public abstract void transferir(Double valor);
+	public abstract void transferir(Double valor, Conta contaDestino);
 	
 	public abstract Double getSaldo();
 }
