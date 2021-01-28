@@ -22,7 +22,9 @@ public abstract class Conta extends EntidadeBase {
 		this.usuario = usuario;
 	}
 
-	public abstract void saca(Double valor);
+	public abstract void debitar(Double valor);
+	public abstract void creditar(Double valor);
+	public abstract void transferir(Double valor);
 	
 	public abstract Double getSaldo();
 }

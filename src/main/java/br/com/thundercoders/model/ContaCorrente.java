@@ -48,9 +48,19 @@ public class ContaCorrente extends Conta {
 	}
 
 	@Override
-	public void saca(Double valor) {
+	public void debitar(Double valor) {
 		this.saldo -= valor;
 		System.out.println("Valor do saldo "+saldo);
-
+	}
+	
+	@Override
+	public void creditar(Double valor) {
+		this.saldo += valor;
+		System.out.println("Valor do saldo "+saldo);
+	}
+	
+	@Override
+	public void transferir(Double valor) {
+		System.out.println("Valor do saldo "+saldo);
 	}
 }
