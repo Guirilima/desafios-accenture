@@ -1,8 +1,11 @@
 package br.com.thundercoders.repository;
 
+import static java.util.Objects.nonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -42,6 +45,39 @@ public class LancamentoRepositoryTest {
 		Lancamento lancamento = repository
 				.save(new Lancamento(conta, planoConta, 20.0, "Cerveja", LocalDateTime.now(), LancamentoTipo.DESPESA));
 		assertEquals(1, lancamento.getId());
+	}
+
+	@Test
+	public void buscarLancamentoTest() {
+
+		Lancamento lancamento = repository.findById(1);
+		assertTrue( nonNull(lancamento) );
+	}
+
+	@Test
+	public void buscarLancamentosPorIdContaTest() {
+
+		List<Lancamento> lancamentos = repository.findByIdConta(3);
+
+		for (Lancamento l : lancamentos) {
+			System.out.println(String.format("ID: %d , VALOR: %.2f , DESCRIÇÂO: %s",l.getId(),l.getValor(),l.getDescricao()));
+		}
+
+		assertTrue( lancamentos.size() > 0 );
+	}
+
+	@Test
+	public void buscarLancamentosPorPeriodoEidContaTest() {
+
+		List<Lancamento> lancamentos = repository.findByPeriod(3,
+				LocalDateTime.of(2020,1,1,00,00),	//Data Inicio
+				LocalDateTime.of(2020,1,13,00,00));//Data Final
+
+		for (Lancamento l : lancamentos) {
+			System.out.println(String.format("ID: %d , VALOR: %.2f , DESCRIÇÂO: %s",l.getId(),l.getValor(),l.getDescricao()));
+		}
+
+		assertTrue( lancamentos.size() > 0 );
 	}
 
 }

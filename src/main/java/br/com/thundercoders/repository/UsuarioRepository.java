@@ -13,6 +13,7 @@ public class UsuarioRepository extends RepositoryImpl<Usuario, Integer> {
 		super(em);
 	}
 
+
 	public boolean exists(String login) {
 		Query query = em.createQuery("SELECT tu FROM Usuario tu WHERE tu.login = :login"); // JPQL
 		query.setParameter("login", login);
