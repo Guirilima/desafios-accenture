@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Conta extends EntidadeBase {
+public abstract class Conta extends EntidadeBase {
 
 	@OneToOne
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id")
@@ -21,4 +21,8 @@ public class Conta extends EntidadeBase {
 	public Conta(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public abstract void saca(Double valor);
+	
+	public abstract Double getSaldo();
 }

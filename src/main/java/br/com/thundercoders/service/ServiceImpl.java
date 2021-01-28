@@ -20,7 +20,7 @@ public class ServiceImpl<T extends EntidadeBase> implements ServiceI<T> {
 
 	@Override
 	public void update(T entity) {
-		// TODO Auto-generated method stub
+		this.repository.update(entity);
 
 	}
 
