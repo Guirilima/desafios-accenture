@@ -37,7 +37,7 @@ public class ContaRepositoryTest {
 		Usuario usuario = usuarioService
 				.save(new Usuario("franklin-barreto87", "125478", "Franklin Barreto", "78914525478"));
 		Conta conta = contaRepository
-				.save(new ContaCorrente(usuario, LancamentoTipo.CREDITO.toString(), "124-9", 200.0));
+				.save(new ContaCorrente(usuario, LancamentoTipo.RECEITA.toString(), "124-9", 200.0));
 		assertNotNull(conta);
 	}
 }

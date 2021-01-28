@@ -11,5 +11,4 @@ public class ContaRepository extends RepositoryImpl<Conta, Integer>{
 		super(em);
 	}
 
-
 }

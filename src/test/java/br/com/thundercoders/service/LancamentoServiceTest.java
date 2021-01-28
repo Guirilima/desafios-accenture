@@ -45,8 +45,9 @@ class LancamentoServiceTest {
 
 	@Test
 	void salvaLancamento() {
+
 		Lancamento salvaLancamento = this.lancamentoService
-				.salvaLancamento(new DtoLancamento(1, 1, 100.0, "Teste", LocalDateTime.now(), LancamentoTipo.CREDITO));
+				.salvaLancamento(new DtoLancamento(1, 1, 100.0, "Teste", LocalDateTime.now(), LancamentoTipo.RECEITA));
 		assertNotNull(salvaLancamento);
 	}
 }

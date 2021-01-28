@@ -40,7 +40,7 @@ public class LancamentoRepositoryTest {
 		PlanoConta planoConta = pRepository.save(new PlanoConta(usuario, "Farra"));
 		Conta conta =  cRepository.save(new ContaCorrente(usuario, "CC", "2014", 200.0));
 		Lancamento lancamento = repository
-				.save(new Lancamento(conta, planoConta, 20.0, "Cerveja", LocalDateTime.now(), LancamentoTipo.DEBITO));
+				.save(new Lancamento(conta, planoConta, 20.0, "Cerveja", LocalDateTime.now(), LancamentoTipo.DESPESA));
 		assertEquals(1, lancamento.getId());
 	}
 

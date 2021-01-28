@@ -1,7 +1,7 @@
 package br.com.thundercoders.repository;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.persistence.EntityManager;
 
@@ -32,8 +32,9 @@ class UsuarioRepositoryTest {
 	@Order(1)
 	@Test
 	void salvarUsuario() {
-		Usuario usuario = (Usuario) repository.save(new Usuario("franklin-barreto", "12345", "Franklin Barreto", "12345678910"));
-		assertNotNull(usuario.getId());//(3, usuario.getId());
+
+		Usuario usuario = repository.save(new Usuario("franklin-barreto", "12345", "Franklin Barreto", "12345678910"));
+		assertNotNull(usuario.getId());
 	}
 	
 	@Order(2)
