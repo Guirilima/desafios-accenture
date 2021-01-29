@@ -1,15 +1,12 @@
 package br.com.thundercoders.service;
 
 import br.com.thundercoders.model.Conta;
-import br.com.thundercoders.model.LancamentoTipo;
 
 public class Receita implements OperacaoI {
 
-	private String id = LancamentoTipo.RECEITA.toString();
 	private ContaService contaService;
 
-	public Receita(ContaService contaService) {
-		this.contaService = contaService;
+	public Receita() {
 	}
 
 	@Override
@@ -20,7 +17,8 @@ public class Receita implements OperacaoI {
 	}
 
 	@Override
-	public String getId() {
-		return id;
+	public void setService(ServiceI<Conta> repository) {
+		this.contaService = (ContaService) repository;
+
 	}
 }
