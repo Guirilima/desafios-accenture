@@ -15,6 +15,7 @@ public class LancamentoService extends ServiceImpl<Lancamento> {
 	private ContaService contaService;
 	private PlanoContaService planoContaService;
 	private LancamentoRepository lancamentoRepository;
+	private OperacaoService operacaoService;
 
 	public LancamentoService(RepositoryImpl<Lancamento, Integer> lancamentoRepository, ContaService contaService,
 			PlanoContaService planoContaService) {
@@ -22,6 +23,7 @@ public class LancamentoService extends ServiceImpl<Lancamento> {
 		this.contaService = contaService;
 		this.planoContaService = planoContaService;
 		this.lancamentoRepository = (LancamentoRepository) lancamentoRepository;
+		operacaoService = new OperacaoService(contaService);
 	}
 
 	public Lancamento salvaLancamento(DtoLancamento dtoLancamento) {
@@ -29,42 +31,32 @@ public class LancamentoService extends ServiceImpl<Lancamento> {
 		PlanoConta planoConta = planoContaService.findById(dtoLancamento.getPlanoContaId());
 		Lancamento lancamento = new Lancamento(conta, planoConta, dtoLancamento.getValor(),
 				dtoLancamento.getDescricao(), dtoLancamento.getDataHora(), dtoLancamento.getLancamentoTipo());
+		OperacaoI operacao = operacaoService.getById(dtoLancamento.getLancamentoTipo().toString());
 
-		switch (dtoLancamento.getLancamentoTipo()) {
-		case DESPESA:
-			conta.debitar(dtoLancamento.getValor());
-			break;
-		case RECEITA:
-			conta.creditar(dtoLancamento.getValor());
-			break;
-		case TRANSFERENCIA:
-			Conta contaDestino = contaService.findById(dtoLancamento.getContaDestinoId());
-			conta.transferir(dtoLancamento.getValor(), contaDestino);
-			contaService.update(contaDestino);
-			lancamento.setContaDestino(contaDestino);
-			break;
-		}
-
-		contaService.update(conta);
+		conta = operacao.efetuarOperacao(dtoLancamento.getValor(), dtoLancamento.getContaId(),
+				dtoLancamento.getContaDestinoId());
+		lancamento.setContaDestino(conta);
 		return repository.save(lancamento);
 	}
-    //Método extrair lancamentos por idConta
-    public List<Lancamento> extractByIdConta(Integer idConta) {
 
-        return lancamentoRepository.findByIdConta(idConta);
-    }
+	// Método extrair lancamentos por idConta
+	public List<Lancamento> extractByIdConta(Integer idConta) {
 
-    //Método extrair por périodo e idConta
-    public List<Lancamento> extractByPeriodAndIdConta(Integer idConta, LocalDateTime dataInicial, LocalDateTime dataFinal) {
+		return lancamentoRepository.findByIdConta(idConta);
+	}
 
-        return lancamentoRepository.findByPeriod(idConta,dataInicial,dataFinal);
-    }
+	// Método extrair por périodo e idConta
+	public List<Lancamento> extractByPeriodAndIdConta(Integer idConta, LocalDateTime dataInicial,
+			LocalDateTime dataFinal) {
 
-    //Método extrair por périodo e idConta e salvar num arquivo .txt (Projeto futuro {SpringBoot}: html=>PDF e CSV/EXCEL)
-    public void extractFileByPeriodAndIdConta(Integer idConta, LocalDateTime dataInicial, LocalDateTime dataFinal) {
-        //Fazer a lógica de salvamento
-        //Método static no Utils e Escrever
-    }
+		return lancamentoRepository.findByPeriod(idConta, dataInicial, dataFinal);
+	}
 
+	// Método extrair por périodo e idConta e salvar num arquivo .txt (Projeto
+	// futuro {SpringBoot}: html=>PDF e CSV/EXCEL)
+	public void extractFileByPeriodAndIdConta(Integer idConta, LocalDateTime dataInicial, LocalDateTime dataFinal) {
+		// Fazer a lógica de salvamento
+		// Método static no Utils e Escrever
+	}
 
 }
