@@ -1,28 +1,45 @@
 # DESAFIO-ACCENTURE #01
 
-## Utilizando tecnologias como JPA, MYSQL e MAVEN
+### Modelagem e implementação do backend de um sistema bancário simples utilizando tecnologias como JPA, MYSQL e MAVEN
 
-[![Image](https://www.google.com/search?q=imagen+java&sxsrf=ALeKk01jdHjQM9nBLZ1_Irs9-IKH0H--uQ:1611708399421&source=lnms&tbm=isch&sa=X&ved=2ahUKEwid0IPV8bruAhWJD7kGHQJaD-0Q_AUoAXoECBQQAw&biw=958&bih=967#imgrc=2zT_F-n1TGaAsM "Imagem JAVA")]
+![Image](http://s2.glbimg.com/ISAMH15-7x5uueooUfpwrNr_S5I=/s.glbimg.com/jo/g1/f/original/2011/08/22/22-java-300.jpg "Imagem JAVA")
 
-## CONSTRUÇÂO DO PROJETO
+## Configuração
 
-- Modelagem
-  - Conta
-  - Lancamento
-  - LancamentoTipo
-  - PlanoConta
-  - Usuario
-- Repository
-  - ContaRepository
-  - LancamentoRepository
-  - PlanoContaRepository
-  - RepositoryI
-  - UsuarioRepository
-- Service
-  - UsuarioService
-- Utils
-  - ConexaoFactory
-  - TextoUtils
+Antes de rodar a aplicação verifique se o arquivo persistence.xml está configurado corretamente (caminho para o banco, e user/password corretos). Esse projeto utiliza um banco de dados Mysql pré-criado pelo usuário para funcionar corretamente.
+
+## Construção do Projeto
+
+### Modelagem
+- **Conta:** classe abstrata que define o modelo de entidade Conta e seus atributos (usuario) e métodos (debitar, creditar, transferir)
+    - **ContaCorrente:** implementação da classe Conta com os atributos que definem uma ContaCorrente (tipo, numero, saldo)
+    - **ContaCredito:** implementação da classe Conta com os atributos que definem uma ContaCredito (numeroCartao, nomeImpresso, cvv, limite)
+  - **Contatipo:** enum (CORRENTE, POUPANCA) utilizado por classes da aplicação
+  - **EntidadeBase:** Classe abstrata herdada pelas classes de model do aplicação com atributo id
+  - **Lancamento:**  define o modelo da entidade Lancamento e seus atributos (plano, planoConta, valor, descricao, dataHora, lancamentoTipo, contaDestino)
+  - **LancamentoTipo:** enum (DESPESA, RECEITA, TRANSFERENCIA) utilizado por classes da aplicação
+  - **PlanoConta:** define o modelo da entidade PlanoConta e seus atributos (usuario, descricao)
+  - **Usuario:** define o modelo da entidade Usuario e seus atributos (login, senha, nome, cpf)
+  
+### Repository
+  - **ContaRepository:** implementação dos métodos específicos de acesso e manipulação de entidades do tipo Conta
+  - **LancamentoRepository:** implementação dos métodos específicos de acesso e manipulação de entidades do tipo Lancamento
+  - **PlanoContaRepository:** implementação dos métodos específicos de acesso e manipulação de entidades do tipo PlanoConta
+  - **RepositoryI:** declara a interface a ser implementada pelas classes do tipo Repository da aplicação (save, update, findAll, findById )
+  - **RepositoryImpl:** implementação básica das funcionalidades das classes de repository da aplicação (save, update, findAll, findById )
+  - **UsuarioRepository:** implementação dos métodos específicos de acesso e manipulação de entidades do tipo Usuario (exists, findByLogin)
+  
+### Service
+  - **ContaService:** Serviços relativos ao ContaRepository utilizados pela aplicação (findById)
+  - **LancamentoService:** Serviços relativos ao LancamentoRepository utilizados pela aplicação (salvaLancamento, extractByIdConta, extractByPeriodAndIdConta)
+  - **PlanoContaService:** Serviços relativos ao PlanoContaRepository utilizados pela aplicação (salvaPlanoConta, findById)
+  - **ServiceI:** Interface implementada pelas classes Service da aplicação
+  - **ServiceImpl:** Implementação base dos serviços utilizados na aplicação (save, update, findById, findAll)
+  - **UsuarioService:** Serviços relativos ao UsuarioRepository utilizados pela aplicação
+  
+### Utils
+  - **ConexaoFactory:** Factory de criação do EntityManager utilizado na aplicação
+  - **TextoUtils:** métodos auxiliares utilizado na validação de String
   
   
   ## Dependências Maven
@@ -108,7 +125,10 @@
         }
         return em;
     }
-    ```
+  ```
+
+## Testes
+  Testes para validar o funcionamento corretos dos métodos nas classes de repository e service foram criados e podem ser encontrados em `src/test/java/br.com.thundercoders`
     
     
   ## Membros
@@ -118,6 +138,7 @@
   - Igor Shimauti, 
   - Isaque Silva, 
   - Franklin Barreto
+  - Caio Assis Capasso
   
   
   
