@@ -5,6 +5,6 @@ import br.com.thundercoders.model.Conta;
 public interface OperacaoI {
 
 	public Conta efetuarOperacao(Double valor, Integer...contas);
-	
-	public String getId();
+
+	public void setService(ServiceI<Conta> service);
 }

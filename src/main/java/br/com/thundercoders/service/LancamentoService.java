@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.Lancamento;
+import br.com.thundercoders.model.LancamentoTipo;
 import br.com.thundercoders.model.PlanoConta;
 import br.com.thundercoders.model.dto.DtoLancamento;
 import br.com.thundercoders.repository.LancamentoRepository;
@@ -15,7 +16,6 @@ public class LancamentoService extends ServiceImpl<Lancamento> {
 	private ContaService contaService;
 	private PlanoContaService planoContaService;
 	private LancamentoRepository lancamentoRepository;
-	private OperacaoService operacaoService;
 
 	public LancamentoService(RepositoryImpl<Lancamento, Integer> lancamentoRepository, ContaService contaService,
 			PlanoContaService planoContaService) {
@@ -23,18 +23,18 @@ public class LancamentoService extends ServiceImpl<Lancamento> {
 		this.contaService = contaService;
 		this.planoContaService = planoContaService;
 		this.lancamentoRepository = (LancamentoRepository) lancamentoRepository;
-		operacaoService = new OperacaoService(contaService);
 	}
 
 	public Lancamento salvaLancamento(DtoLancamento dtoLancamento) {
+		LancamentoTipo lancamentoTipo = dtoLancamento.getLancamentoTipo();
 		Conta conta = contaService.findById(dtoLancamento.getContaId());
 		PlanoConta planoConta = planoContaService.findById(dtoLancamento.getPlanoContaId());
 		Lancamento lancamento = new Lancamento(conta, planoConta, dtoLancamento.getValor(),
 				dtoLancamento.getDescricao(), dtoLancamento.getDataHora(), dtoLancamento.getLancamentoTipo());
-		OperacaoI operacao = operacaoService.getById(dtoLancamento.getLancamentoTipo().toString());
-
-		conta = operacao.efetuarOperacao(dtoLancamento.getValor(), dtoLancamento.getContaId(),
-				dtoLancamento.getContaDestinoId());
+		
+		lancamentoTipo.setService(contaService);;
+		conta = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(),
+				dtoLancamento.getContaId(), dtoLancamento.getContaDestinoId());
 		lancamento.setContaDestino(conta);
 		return repository.save(lancamento);
 	}
