@@ -1,14 +1,17 @@
 package br.com.thundercoders.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.thundercoders.model.PlanoConta;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.model.dto.DtoPlanoConta;
 import br.com.thundercoders.repository.PlanoContaRepository;
 
+@Service
 public class PlanoContaService {
 
+	
 	private UsuarioService usuarioService;
 	private PlanoContaRepository planoContaRepository;
 

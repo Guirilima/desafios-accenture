@@ -26,14 +26,17 @@ public class UsuarioService {
 
 	public void incluir(Usuario usuarioEntity) throws IllegalAccessException {
 
+		System.err.println(usuarioEntity.getLogin());
+		
 		boolean comprimentoValido = TextoUtils.validaComprimento(usuarioEntity.getLogin(), 20);
 		if (!comprimentoValido) {
-			throw new IllegalAccessException();
+			
+			throw new IllegalAccessException("Comprimento inválido");
 		}
 
-		usuarioEntity = usuarioRepository.findByLogin(usuarioEntity.getLogin());
+		Usuario usuarioExists = usuarioRepository.findByLogin(usuarioEntity.getLogin());
 
-		if (usuarioRepository.exists(usuarioEntity.getLogin())) // nonNull(usuarioEntity) ){
+		if (usuarioExists != null) // nonNull(usuarioEntity) ){
 		{
 			throw new IllegalStateException("Já existe um usuario com o login " + usuarioEntity.getLogin());
 		}
