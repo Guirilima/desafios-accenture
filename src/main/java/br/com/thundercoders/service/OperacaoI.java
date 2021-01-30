@@ -4,7 +4,7 @@ import br.com.thundercoders.model.Conta;
 
 public interface OperacaoI {
 
-	public Conta efetuarOperacao(Double valor, Integer...contas);
+	public Conta efetuarOperacao(Double valor, Integer... contas);
 
-	public void setService(ServiceI<Conta> service);
+	public void setService(ContaService service);
 }

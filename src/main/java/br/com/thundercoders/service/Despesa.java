@@ -8,18 +8,17 @@ public class Despesa implements OperacaoI {
 
 	public Despesa() {
 	}
-	
+
 	@Override
 	public Conta efetuarOperacao(Double valor, Integer... contaId) {
-		Conta conta  = contaService.findById(contaId[0]);
+		Conta conta = contaService.findById(contaId[0]);
 		conta.debitar(valor);
 		return null;
 	}
 
 	@Override
-	public void setService(ServiceI<Conta> service) {
-		contaService = (ContaService) service;
+	public void setService(ContaService service) {
+		contaService = service;
 	}
-
 
 }

@@ -15,7 +15,6 @@ public abstract class Conta extends EntidadeBase {
 	private Usuario usuario;
 	
 	public Conta() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Conta(Usuario usuario) {

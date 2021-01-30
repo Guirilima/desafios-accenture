@@ -19,7 +19,7 @@ public class Transferencia implements OperacaoI {
 	}
 
 	@Override
-	public void setService(ServiceI<Conta> service) {
+	public void setService(ContaService service) {
 		this.contaService = (ContaService) service;
 
 	}

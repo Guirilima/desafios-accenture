@@ -1,19 +1,23 @@
 package br.com.thundercoders.service;
 
-import java.util.Optional;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.thundercoders.model.Usuario;
-import br.com.thundercoders.repository.RepositoryI;
 import br.com.thundercoders.repository.UsuarioRepository;
 import br.com.thundercoders.utils.TextoUtils;
 
-public class UsuarioService extends ServiceImpl<Usuario>{
+@Service
+public class UsuarioService {
 
 	private UsuarioRepository usuarioRepository;
 
-	public UsuarioService(RepositoryI<Usuario, Integer> usuarioRepository) {
-		super(usuarioRepository);
-		this.usuarioRepository = (UsuarioRepository) usuarioRepository;
+	@Autowired
+	public UsuarioService(UsuarioRepository usuarioRepository) {
+
+		this.usuarioRepository = usuarioRepository;
 	}
 
 	public boolean loginComprimento(String login) {
@@ -35,14 +39,18 @@ public class UsuarioService extends ServiceImpl<Usuario>{
 		}
 
 		usuarioRepository.save(usuarioEntity);
-	}	
-	
-	public Usuario findById(Integer id) {
-		Optional<Usuario> usuario = Optional.of(usuarioRepository.findById(id));
-		if (!usuario.isPresent()) {
-			throw new RuntimeException("Usuário inexistente");
-		}
-
-		return usuario.get();
 	}
+
+	public Usuario findById(Integer id) {
+		return usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário inexistente"));
+	}
+
+	public Usuario save(Usuario usuario) {
+		return this.usuarioRepository.save(usuario);
+	}
+
+	public List<Usuario> findAll() {
+		return usuarioRepository.findAll();
+	}
+
 }

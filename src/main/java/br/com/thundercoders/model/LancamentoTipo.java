@@ -1,9 +1,9 @@
 package br.com.thundercoders.model;
 
+import br.com.thundercoders.service.ContaService;
 import br.com.thundercoders.service.Despesa;
 import br.com.thundercoders.service.OperacaoI;
 import br.com.thundercoders.service.Receita;
-import br.com.thundercoders.service.ServiceI;
 import br.com.thundercoders.service.Transferencia;
 
 public enum LancamentoTipo {
@@ -16,7 +16,7 @@ public enum LancamentoTipo {
 		this.operacao = operacao;
 	}
 
-	public void setService(ServiceI<Conta> service) {
+	public void setService(ContaService service) {
 		this.operacao.setService(service);
 	}
 

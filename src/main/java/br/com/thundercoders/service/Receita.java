@@ -17,8 +17,8 @@ public class Receita implements OperacaoI {
 	}
 
 	@Override
-	public void setService(ServiceI<Conta> repository) {
-		this.contaService = (ContaService) repository;
+	public void setService(ContaService repository) {
+		this.contaService = repository;
 
 	}
 }
