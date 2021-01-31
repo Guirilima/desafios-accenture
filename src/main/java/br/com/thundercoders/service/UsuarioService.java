@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.Usuario;
+import br.com.thundercoders.model.dto.DtoUsuario;
 import br.com.thundercoders.repository.UsuarioRepository;
 import br.com.thundercoders.utils.TextoUtils;
 
@@ -13,11 +15,13 @@ import br.com.thundercoders.utils.TextoUtils;
 public class UsuarioService {
 
 	private UsuarioRepository usuarioRepository;
+	private ContaService contaService;
 
 	@Autowired
-	public UsuarioService(UsuarioRepository usuarioRepository) {
+	public UsuarioService(UsuarioRepository usuarioRepository, ContaService contaService) {
 
 		this.usuarioRepository = usuarioRepository;
+		this.contaService = contaService;
 	}
 
 	public boolean loginComprimento(String login) {
@@ -27,10 +31,10 @@ public class UsuarioService {
 	public void incluir(Usuario usuarioEntity) throws IllegalAccessException {
 
 		System.err.println(usuarioEntity.getLogin());
-		
+
 		boolean comprimentoValido = TextoUtils.validaComprimento(usuarioEntity.getLogin(), 20);
 		if (!comprimentoValido) {
-			
+
 			throw new IllegalAccessException("Comprimento inválido");
 		}
 
@@ -48,8 +52,15 @@ public class UsuarioService {
 		return usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário inexistente"));
 	}
 
-	public Usuario save(Usuario usuario) {
-		return this.usuarioRepository.save(usuario);
+	public Usuario save(DtoUsuario dtoUsuario) {
+
+		Usuario usuario = dtoUsuario.converte();
+		Usuario usuarioSalvo = this.usuarioRepository.save(usuario);
+		Conta conta = dtoUsuario.getContaTipo().getConta();
+		conta.setUsuario(usuario);
+		conta.setSaldo(dtoUsuario.getSaldo());
+		contaService.save(conta);
+		return usuarioSalvo;
 	}
 
 	public List<Usuario> findAll() {

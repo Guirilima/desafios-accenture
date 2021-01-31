@@ -48,4 +48,9 @@ public class ContaCredito extends Conta {
 	public Double getSaldo() {
 		return null;
 	}
+
+	@Override
+	public void setSaldo(Double saldo) {
+		this.limite = saldo;
+	}
 }

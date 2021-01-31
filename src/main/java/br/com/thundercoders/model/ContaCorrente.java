@@ -63,4 +63,10 @@ public class ContaCorrente extends Conta {
 		this.debitar(valor);
 		contaDestino.creditar(valor);
 	}
+
+	@Override
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+		
+	}
 }

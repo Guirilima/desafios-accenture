@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 @Entity
 public class Usuario extends EntidadeBase {
 
-	@Column(name = "user", length = 20)
+	@Column(length = 20)
 	private String login;
 
-	@Column(name = "password", length = 100, nullable = false)
+	@Column(length = 100, nullable = false)
 	private String senha;
 
 	@Column(length = 50, nullable = false)

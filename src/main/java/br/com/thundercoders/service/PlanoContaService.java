@@ -11,7 +11,6 @@ import br.com.thundercoders.repository.PlanoContaRepository;
 @Service
 public class PlanoContaService {
 
-	
 	private UsuarioService usuarioService;
 	private PlanoContaRepository planoContaRepository;
 

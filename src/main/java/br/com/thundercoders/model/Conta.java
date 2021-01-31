@@ -13,17 +13,26 @@ public abstract class Conta extends EntidadeBase {
 	@OneToOne
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id")
 	private Usuario usuario;
-	
+
 	public Conta() {
 	}
-	
+
 	public Conta(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
 	public abstract void debitar(Double valor);
+
 	public abstract void creditar(Double valor);
+
 	public abstract void transferir(Double valor, Conta contaDestino);
-	
+
 	public abstract Double getSaldo();
+
+	public abstract void setSaldo(Double saldo);
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 }

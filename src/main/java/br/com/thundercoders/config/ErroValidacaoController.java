@@ -23,7 +23,7 @@ public class ErroValidacaoController {
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public List<DtoErro> handler(MethodArgumentNotValidException exception) {
+	public List<DtoErro> handlerErro(MethodArgumentNotValidException exception) {
 		List<DtoErro> erros = new ArrayList<>();
 		List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
 		fieldErrors.stream().forEach(e -> {
@@ -32,4 +32,5 @@ public class ErroValidacaoController {
 		});
 		return erros;
 	}
+
 }
