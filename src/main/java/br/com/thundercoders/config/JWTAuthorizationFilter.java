@@ -38,7 +38,6 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		String token = recuperaToken(request);
 		
 		if (tokenService.isTokenValid(token)) {
-			System.out.println("Token valido");
 			autenticaUsuario(token);
 		}
 		filterChain.doFilter(request, response);
@@ -49,7 +48,6 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		String jwtToken = request.getHeader(HEADER);
 		
 		if (jwtToken != null && !jwtToken.isEmpty() && jwtToken.startsWith("Bearer ")) {
-			System.out.println("Retornou token");
 			return jwtToken.replace(PREFIX, "");
 		}
 		return null;

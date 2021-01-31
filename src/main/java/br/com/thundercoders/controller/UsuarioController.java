@@ -58,7 +58,6 @@ public class UsuarioController {
 
 	@PostMapping("/logar")
 	public ResponseEntity<DtoToken> logar(@RequestBody DtoLogin dtoLogin) {
-		System.out.println("Testando");
 		try {
 			
 			UsernamePasswordAuthenticationToken dadosLogin = dtoLogin.converte();
@@ -66,7 +65,6 @@ public class UsuarioController {
 			String token = tokenService.gerarToken(authentication);
 			return ResponseEntity.ok(new DtoToken(token, "Bearer"));
 		} catch (AuthenticationException e) {
-			System.out.println(e.getMessage());
 			return ResponseEntity.badRequest().build();
 
 		}
