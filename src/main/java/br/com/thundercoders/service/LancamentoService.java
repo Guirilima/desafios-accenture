@@ -14,12 +14,11 @@ import br.com.thundercoders.model.dto.DtoLancamento;
 import br.com.thundercoders.repository.LancamentoRepository;
 
 @Service
-public class LancamentoService{
+public class LancamentoService {
 
 	private ContaService contaService;
 	private PlanoContaService planoContaService;
 	private LancamentoRepository lancamentoRepository;
-
 
 	@Autowired
 	public LancamentoService(LancamentoRepository lancamentoRepository, ContaService contaService,
@@ -28,17 +27,22 @@ public class LancamentoService{
 		this.planoContaService = planoContaService;
 		this.lancamentoRepository = lancamentoRepository;
 	}
-	
+
 	public Lancamento salvaLancamento(DtoLancamento dtoLancamento) {
 		LancamentoTipo lancamentoTipo = dtoLancamento.getLancamentoTipo();
 		Conta conta = contaService.findById(dtoLancamento.getContaId());
-		PlanoConta planoConta = planoContaService.findById(dtoLancamento.getPlanoContaId());
+		PlanoConta planoConta = null;
+		if (dtoLancamento.getPlanoContaId() != null) {
+
+			planoConta = planoContaService.findById(dtoLancamento.getPlanoContaId());
+		}
 		Lancamento lancamento = new Lancamento(conta, planoConta, dtoLancamento.getValor(),
 				dtoLancamento.getDescricao(), dtoLancamento.getDataHora(), dtoLancamento.getLancamentoTipo());
-		
-		lancamentoTipo.setService(contaService);;
-		conta = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(),
-				dtoLancamento.getContaId(), dtoLancamento.getContaDestinoId());
+
+		lancamentoTipo.setService(contaService);
+		;
+		conta = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(), dtoLancamento.getContaId(),
+				dtoLancamento.getContaDestinoId());
 		lancamento.setContaDestino(conta);
 		return lancamentoRepository.save(lancamento);
 	}
