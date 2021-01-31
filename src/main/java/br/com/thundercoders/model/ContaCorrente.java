@@ -18,7 +18,6 @@ public class ContaCorrente extends Conta {
 	private Double saldo;
 
 	public ContaCorrente() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public ContaCorrente(Usuario usuario, String tipo, String numero, Double saldo) {
@@ -63,5 +62,11 @@ public class ContaCorrente extends Conta {
 	public void transferir(Double valor,Conta contaDestino) {
 		this.debitar(valor);
 		contaDestino.creditar(valor);
+	}
+
+	@Override
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+		
 	}
 }

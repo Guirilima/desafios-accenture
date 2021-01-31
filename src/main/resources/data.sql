@@ -1,0 +1,2 @@
+INSERT INTO usuario (login,senha,nome,cpf) VALUES ("franklin-barreto", "12345", "Franklin Barreto", "12345678910");
+INSERT INTO usuario (login,senha,nome,cpf) VALUES ("joao.pedro", "14587", "João Pedro", "45896578412");

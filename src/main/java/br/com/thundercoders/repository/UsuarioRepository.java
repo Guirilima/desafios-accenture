@@ -1,35 +1,18 @@
 package br.com.thundercoders.repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.Query;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import br.com.thundercoders.model.Usuario;
 
-public class UsuarioRepository extends RepositoryImpl<Usuario, Integer> {
-
-	public UsuarioRepository(EntityManager em) {
-		super(em);
-	}
+@Repository
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 
-	public boolean exists(String login) {
-		Query query = em.createQuery("SELECT tu FROM Usuario tu WHERE tu.login = :login"); // JPQL
-		query.setParameter("login", login);
-		return query.getResultList().size() != 0;
-	}
-
-	public Usuario findByLogin(String login) {
-		Query query = em.createQuery("SELECT tu FROM Usuario tu WHERE tu.login = :login"); // JPQL
-		query.setParameter("login", login);
-
-		Usuario usuariousuario = null;
-		try {
-			usuariousuario = (Usuario) query.getSingleResult();
-		} catch (NoResultException | NonUniqueResultException nre) {
-			// usuariousuario = null; // Irrelevante, pois ele já é null . . .
-		}
-		return usuariousuario;
-	}
+	@Query("SELECT tu FROM Usuario tu WHERE tu.login = :login")
+	public boolean exists(String login);
+	
+	
+	public Usuario findByLogin(String login);
 }

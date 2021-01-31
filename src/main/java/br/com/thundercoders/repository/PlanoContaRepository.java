@@ -1,12 +1,10 @@
 package br.com.thundercoders.repository;
 
-import javax.persistence.EntityManager;
+import org.springframework.data.repository.CrudRepository;
 
 import br.com.thundercoders.model.PlanoConta;
 
-public class PlanoContaRepository extends RepositoryImpl<PlanoConta, Integer> {
+public interface PlanoContaRepository extends CrudRepository<PlanoConta, Integer> {
 
-	public PlanoContaRepository(EntityManager em) {
-		super(em);
-	}
+	
 }

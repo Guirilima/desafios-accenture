@@ -1,22 +1,27 @@
 package br.com.thundercoders.service;
 
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.thundercoders.model.Conta;
-import br.com.thundercoders.repository.RepositoryImpl;
+import br.com.thundercoders.repository.ContaRepository;
 
-public class ContaService extends ServiceImpl<Conta> {
+@Service
+public class ContaService {
 
-	public ContaService(RepositoryImpl<Conta, Integer> contaRepository) {
+	private ContaRepository contaRepository;
 
-		super(contaRepository);
+	@Autowired
+	public ContaService(ContaRepository contaRepository) {
+		this.contaRepository = contaRepository;
 	}
 
 	public Conta findById(Integer id) {
-		Optional<Conta> conta = Optional.of(repository.findById(id));
-		if (!conta.isPresent()) {
-			throw new RuntimeException("Conta inexistente");
-		}
-		return conta.get();
+		return contaRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário inexistente"));
+	}
+
+	public Conta save(Conta conta) {
+
+		return contaRepository.save(conta);
 	}
 }

@@ -13,7 +13,6 @@ public class PlanoConta extends EntidadeBase {
 	private String descricao;
 
 	public PlanoConta() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public PlanoConta(Usuario usuario, String descricao) {

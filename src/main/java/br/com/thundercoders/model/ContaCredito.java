@@ -3,9 +3,9 @@ package br.com.thundercoders.model;
 import javax.persistence.*;
 
 @Entity
-@PrimaryKeyJoinColumn(name="id")
+@PrimaryKeyJoinColumn(name = "id")
 public class ContaCredito extends Conta {
-	
+
 	@Column(name = "numero_cartao")
 	private String numeroCartao;
 
@@ -14,12 +14,11 @@ public class ContaCredito extends Conta {
 
 	@Column(name = "cvv")
 	private String cvv;
-	
+
 	@Column(name = "limite")
 	private Double limite;
-	
+
 	public ContaCredito() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public ContaCredito(Usuario usuario, String numeroCartao, String nomeImpresso, String cvv, Double limite) {
@@ -32,25 +31,26 @@ public class ContaCredito extends Conta {
 
 	@Override
 	public void debitar(Double valor) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void creditar(Double valor) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void transferir(Double valor,Conta contaDestino) {
-		// TODO Auto-generated method stub
-		
+	public void transferir(Double valor, Conta contaDestino) {
+
 	}
 
 	@Override
 	public Double getSaldo() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setSaldo(Double saldo) {
+		this.limite = saldo;
 	}
 }

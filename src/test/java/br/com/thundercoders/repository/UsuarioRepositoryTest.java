@@ -1,8 +1,6 @@
 package br.com.thundercoders.repository;
 
-import static org.junit.Assert.assertNotNull;
-
-import javax.persistence.EntityManager;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -11,35 +9,37 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.thundercoders.model.Usuario;
-import br.com.thundercoders.utils.ConexaoFactory;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
+@DataJpaTest
 class UsuarioRepositoryTest {
 
+	@Autowired
 	private UsuarioRepository repository;
-	private EntityManager em;
+	private Usuario usuario;
 
 	@BeforeAll
 	public void initialize() {
-		this.em = ConexaoFactory.getConexao();
-		repository = new UsuarioRepository(em);
+		usuario = repository.save(new Usuario("franklin-barreto", "12345", "Franklin Barreto", "12345678910"));
+
 	}
 
 	@Order(1)
 	@Test
 	void salvarUsuario() {
 
-		Usuario usuario = repository.save(new Usuario("franklin-barreto", "12345", "Franklin Barreto", "12345678910"));
 		assertNotNull(usuario.getId());
 	}
-	
+
 	@Order(2)
 	@Test
 	void buscarUsuarioPorIdentificador() {
-		Usuario usuario = (Usuario) repository.findById(1);
+		Usuario usuario = repository.findById(1).orElseThrow(() -> new RuntimeException("usuário não existe"));
 		assertNotNull(usuario);
 	}
 

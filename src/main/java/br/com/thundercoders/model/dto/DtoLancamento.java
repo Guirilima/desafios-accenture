@@ -13,6 +13,9 @@ public class DtoLancamento {
 	private String descricao;
 	private LocalDateTime dataHora;
 	private LancamentoTipo lancamentoTipo;
+	
+	public DtoLancamento() {
+	}
 
 	public DtoLancamento(Integer contaId, Integer planoContaId, Double valor, String descricao, LocalDateTime dataHora,
 			LancamentoTipo lancamentoTipo) {

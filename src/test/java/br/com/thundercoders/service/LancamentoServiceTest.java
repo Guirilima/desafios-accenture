@@ -1,11 +1,9 @@
 package br.com.thundercoders.service;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDateTime;
-
-import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -14,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.ContaCorrente;
@@ -23,24 +23,20 @@ import br.com.thundercoders.model.LancamentoTipo;
 import br.com.thundercoders.model.PlanoConta;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.model.dto.DtoLancamento;
-import br.com.thundercoders.repository.ContaRepository;
-import br.com.thundercoders.repository.LancamentoRepository;
 import br.com.thundercoders.repository.PlanoContaRepository;
-import br.com.thundercoders.repository.UsuarioRepository;
-import br.com.thundercoders.utils.ConexaoFactory;
 
 @TestMethodOrder(OrderAnnotation.class)
 @TestInstance(Lifecycle.PER_CLASS)
+@SpringBootTest
 class LancamentoServiceTest {
-	private EntityManager em;
+	@Autowired
 	private LancamentoService lancamentoService;
-	private LancamentoRepository lancamentoRepository;
+	@Autowired
 	private ContaService contaService;
-	private PlanoContaService planoContaService;
-	private ContaRepository contaRepository;
+	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
 	private PlanoContaRepository planoContaRepository;
-	private UsuarioRepository usuarioRepository;
 	private Usuario usuario;
 	private Conta conta;
 	private PlanoConta planoConta;
@@ -48,15 +44,6 @@ class LancamentoServiceTest {
 
 	@BeforeAll
 	public void initialize() {
-		this.em = ConexaoFactory.getConexao();
-		this.contaRepository = new ContaRepository(em);
-		this.usuarioRepository = new UsuarioRepository(em);
-		this.planoContaRepository = new PlanoContaRepository(em);
-		this.lancamentoRepository = new LancamentoRepository(em);
-		this.usuarioService = new UsuarioService(usuarioRepository);
-		this.contaService = new ContaService(contaRepository);
-		this.planoContaService = new PlanoContaService(usuarioService, planoContaRepository);
-		lancamentoService = new LancamentoService(lancamentoRepository, contaService, planoContaService);
 		this.usuario = this.usuarioService.save(new Usuario("joao.pedro", "14587", "João Pedro", "45896578412"));
 		this.conta = contaService.save(new ContaCorrente(usuario, ContaTipo.CORRENTE.toString(), "4578", 300.0));
 		this.contaDestino = contaService.save(new ContaCorrente(usuario, ContaTipo.CORRENTE.toString(), "5000", 400.0));
@@ -72,7 +59,7 @@ class LancamentoServiceTest {
 		assertEquals(400, salvaLancamento.getConta().getSaldo());
 		assertNotNull(salvaLancamento);
 	}
-	
+
 	@Test
 	@Order(2)
 	void salvaLancamentoDespesa() {

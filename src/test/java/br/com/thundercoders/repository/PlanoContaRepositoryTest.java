@@ -1,34 +1,39 @@
 package br.com.thundercoders.repository;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import javax.persistence.EntityManager;
-
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.thundercoders.model.PlanoConta;
 import br.com.thundercoders.model.Usuario;
-import br.com.thundercoders.utils.ConexaoFactory;
 
+@DataJpaTest
+@TestInstance(Lifecycle.PER_CLASS)
 class PlanoContaRepositoryTest {
 
+	@Autowired
 	private PlanoContaRepository repository;
+	@Autowired
 	private UsuarioRepository usuarioRepository;
-	private EntityManager em;
 
-	@BeforeEach
+	private Usuario usuario;
+
+	@BeforeAll
 	public void initialize() {
-		this.em = ConexaoFactory.getConexao();
-		this.repository = new PlanoContaRepository(em);
-		this.usuarioRepository = new UsuarioRepository(em);
+	   usuarioRepository.save(new Usuario("franklin-barreto", "12345", "Franklin Barreto", "12345678910"));
+	   usuarioRepository.save(new Usuario("franklin-barreto41", "12345", "Franklin Barreto", "12345678910"));
 	}
 
 	@Test
 	@Order(1)
 	void salvarPlanoContasTest() {
-		Usuario usuario = usuarioRepository.findById(1);
+		usuario = usuarioRepository.findById(1).orElseThrow(() -> new RuntimeException("usuário inexistente"));
 		PlanoConta planoConta = new PlanoConta(usuario, "Pagamento de salário");
 		PlanoConta save = repository.save(planoConta);
 		assertNotNull(save.getId());
@@ -37,7 +42,7 @@ class PlanoContaRepositoryTest {
 	@Test
 	@Order(2)
 	void salvarPlanoContasTest2() {
-		Usuario usuario = usuarioRepository.findById(2);
+		Usuario usuario = usuarioRepository.findById(2).orElseThrow(() -> new RuntimeException("usuário inexistente"));
 		PlanoConta planoConta = new PlanoConta(usuario, "Pagamento de salário");
 		PlanoConta save = repository.save(planoConta);
 		assertNotNull(save.getId());
