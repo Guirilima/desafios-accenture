@@ -13,7 +13,9 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import br.com.thundercoders.model.ContaTipo;
 import br.com.thundercoders.model.Usuario;
+import br.com.thundercoders.model.dto.DtoUsuario;
 import br.com.thundercoders.repository.UsuarioRepository;
 
 @TestInstance(Lifecycle.PER_CLASS)
@@ -28,15 +30,15 @@ public class UsuarioServiceTest {
 
 	@BeforeAll
 	public void initialize() {
-		usuario = this.usuarioService.save(new Usuario("joao.pedro", "12345", "João Pedro", "54798563247"));
+		usuario = this.usuarioService.save(new DtoUsuario("joao.pedro", "12345", "João Pedro", "54798563247", ContaTipo.CORRENTE, 1000.00));
 	}
 
 	@Test
 	@Order(1)
 	public void salvaUsuario() throws IllegalAccessException {
-		Usuario usuario = new Usuario("joao.pedro", "12345", "João Pedro", "54798563247");
+		DtoUsuario dtoUsuario = new DtoUsuario("joao.pedro", "12345", "João Pedro", "54798563247", ContaTipo.CORRENTE, 1000.00);
 		when(usuarioRepository.save(usuario)).thenReturn(new Usuario());
-		Usuario save = usuarioService.save(usuario);
+		Usuario save = usuarioService.save(dtoUsuario);
 		assertNotNull(save);
 	}
 	/*

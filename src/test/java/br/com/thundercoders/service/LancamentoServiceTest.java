@@ -23,6 +23,7 @@ import br.com.thundercoders.model.LancamentoTipo;
 import br.com.thundercoders.model.PlanoConta;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.model.dto.DtoLancamento;
+import br.com.thundercoders.model.dto.DtoUsuario;
 import br.com.thundercoders.repository.PlanoContaRepository;
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -44,7 +45,7 @@ class LancamentoServiceTest {
 
 	@BeforeAll
 	public void initialize() {
-		this.usuario = this.usuarioService.save(new Usuario("joao.pedro", "14587", "João Pedro", "45896578412"));
+		this.usuario = this.usuarioService.save(new DtoUsuario("joao.pedro", "14587", "João Pedro", "45896578412", ContaTipo.CORRENTE, 1000.00));
 		this.conta = contaService.save(new ContaCorrente(usuario, ContaTipo.CORRENTE.toString(), "4578", 300.0));
 		this.contaDestino = contaService.save(new ContaCorrente(usuario, ContaTipo.CORRENTE.toString(), "5000", 400.0));
 	}

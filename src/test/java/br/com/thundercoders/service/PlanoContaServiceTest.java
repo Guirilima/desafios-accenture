@@ -16,6 +16,7 @@ import br.com.thundercoders.repository.UsuarioRepository;
 @TestMethodOrder(OrderAnnotation.class)
 public class PlanoContaServiceTest {
 
+	private ContaService contaService;
 	private PlanoContaService planoContaService;
 	private PlanoContaRepository repository;
 	private UsuarioService usuarioService;
@@ -23,7 +24,7 @@ public class PlanoContaServiceTest {
 
 	@BeforeAll
 	public void initialize() {
-		this.usuarioService = new UsuarioService(uRepository);
+		this.usuarioService = new UsuarioService(uRepository, contaService);
 		this.planoContaService = new PlanoContaService(usuarioService, repository);
 	}
 
