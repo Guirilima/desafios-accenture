@@ -22,10 +22,10 @@ public class PlanoContaServiceTest {
 	private UsuarioRepository uRepository;
 
 	@BeforeAll
-	public void initialize() {
-		this.usuarioService = new UsuarioService(uRepository);
-		this.planoContaService = new PlanoContaService(usuarioService, repository);
-	}
+//	public void initialize() {
+//		this.usuarioService = new UsuarioService(uRepository);
+//		this.planoContaService = new PlanoContaService(usuarioService, repository);
+//	}
 
 	@Test
 	@Order(1)

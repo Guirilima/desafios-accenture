@@ -1,12 +1,12 @@
 package br.com.thundercoders.controller;
 
+import java.math.BigInteger;
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.thundercoders.model.Lancamento;
@@ -39,6 +39,27 @@ public class LancamentoController {
 				lancamentoSalvo.getValor(), lancamentoSalvo.getDescricao(), lancamentoSalvo.getDataHora(),
 				lancamentoSalvo.getLancamentoTipo());
 		return ResponseEntity.created(uri).body(lancamentoDto);
+	}
+
+	@GetMapping("{idConta}")
+	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorConta(@PathVariable("idConta") Integer idConta) {
+
+		try {
+			return ResponseEntity.ok(lancamentoService.buscarLancamentoPorConta(idConta));
+		}catch (Exception ee) {
+			return null;
+		}
+	}
+
+	@GetMapping("porPeriodo/{idConta}")
+	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorPeriodoEConta(@PathVariable("idConta") Integer idConta, @RequestParam LocalDateTime dataInicial,
+																		  @RequestParam LocalDateTime dataFinal) {
+
+		try {
+			return ResponseEntity.ok(lancamentoService.buscarPorPeriodoEIdConta(idConta,dataInicial,dataFinal));
+		}catch (Exception ee) {
+			return null;
+		}
 	}
 
 }

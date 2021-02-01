@@ -26,19 +26,19 @@ public class UsuarioServiceTest {
 	private UsuarioRepository usuarioRepository;
 	private Usuario usuario;
 
-	@BeforeAll
-	public void initialize() {
-		usuario = this.usuarioService.save(new Usuario("joao.pedro", "12345", "João Pedro", "54798563247"));
-	}
-
-	@Test
-	@Order(1)
-	public void salvaUsuario() throws IllegalAccessException {
-		Usuario usuario = new Usuario("joao.pedro", "12345", "João Pedro", "54798563247");
-		when(usuarioRepository.save(usuario)).thenReturn(new Usuario());
-		Usuario save = usuarioService.save(usuario);
-		assertNotNull(save);
-	}
+//	@BeforeAll
+//	public void initialize() {
+//		usuario = this.usuarioService.save(new Usuario("joao.pedro", "12345", "João Pedro", "54798563247"));
+//	}
+//
+//	@Test
+//	@Order(1)
+//	public void salvaUsuario() throws IllegalAccessException {
+//		Usuario usuario = new Usuario("joao.pedro", "12345", "João Pedro", "54798563247");
+//		when(usuarioRepository.save(usuario)).thenReturn(new Usuario());
+//		Usuario save = usuarioService.save(usuario);
+//		assertNotNull(save);
+//	}
 	/*
 	 * @Test
 	 * 

@@ -1,15 +1,16 @@
 package br.com.thundercoders.service;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import br.com.thundercoders.model.*;
+import br.com.thundercoders.repository.ContaCorrenteRepository;
+import br.com.thundercoders.repository.ContaCreditoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.thundercoders.model.Conta;
-import br.com.thundercoders.model.Lancamento;
-import br.com.thundercoders.model.LancamentoTipo;
-import br.com.thundercoders.model.PlanoConta;
 import br.com.thundercoders.model.dto.DtoLancamento;
 import br.com.thundercoders.repository.LancamentoRepository;
 
@@ -19,13 +20,18 @@ public class LancamentoService {
 	private ContaService contaService;
 	private PlanoContaService planoContaService;
 	private LancamentoRepository lancamentoRepository;
+	private ContaCorrenteRepository contaCorrenteRepository;
+	private ContaCreditoRepository contaCreditoRepository;
 
 	@Autowired
 	public LancamentoService(LancamentoRepository lancamentoRepository, ContaService contaService,
-			PlanoContaService planoContaService) {
+			PlanoContaService planoContaService,ContaCorrenteRepository contaCorrenteRepository, ContaCreditoRepository contaCreditoRepository) {
 		this.contaService = contaService;
 		this.planoContaService = planoContaService;
 		this.lancamentoRepository = lancamentoRepository;
+		this.contaCorrenteRepository = contaCorrenteRepository;
+		this.contaCreditoRepository = contaCreditoRepository;
+
 	}
 
 	public Lancamento salvaLancamento(DtoLancamento dtoLancamento) {
@@ -48,16 +54,30 @@ public class LancamentoService {
 	}
 
 	// Método extrair lancamentos por idConta
-	public List<Lancamento> extractByIdConta(Integer idConta) {
+	public List<DtoLancamento> buscarLancamentoPorConta(Integer idConta) {
 
-		return lancamentoRepository.findAllByContaId(idConta);
+		 List<DtoLancamento> listDtoLancamentos = new ArrayList<>();
+
+		for ( Lancamento lancamentoAtual : lancamentoRepository.findAllByContaId(idConta)) {
+
+			listDtoLancamentos.add(new DtoLancamento(lancamentoAtual));
+
+		}
+
+		return listDtoLancamentos;
 	}
 
 	// Método extrair por périodo e idConta
-	public List<Lancamento> extractByPeriodAndIdConta(Integer idConta, LocalDateTime dataInicial,
+	public List<DtoLancamento> buscarPorPeriodoEIdConta(Integer idConta, LocalDateTime dataInicial,
 			LocalDateTime dataFinal) {
 
-		return lancamentoRepository.findAllByContaIdAndDataHoraBetween(idConta, dataInicial, dataFinal);
+		List<DtoLancamento> listDtoLancamentos = new ArrayList<>();
+		for ( Lancamento lancamentoAtual : lancamentoRepository.findAllByContaIdAndDataHoraBetween(idConta,dataInicial,dataFinal)) {
+
+			listDtoLancamentos.add(new DtoLancamento(lancamentoAtual));
+
+		}
+		return listDtoLancamentos;
 	}
 
 	// Método extrair por périodo e idConta e salvar num arquivo .txt (Projeto

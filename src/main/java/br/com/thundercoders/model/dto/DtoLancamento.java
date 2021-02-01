@@ -2,6 +2,7 @@ package br.com.thundercoders.model.dto;
 
 import java.time.LocalDateTime;
 
+import br.com.thundercoders.model.Lancamento;
 import br.com.thundercoders.model.LancamentoTipo;
 
 public class DtoLancamento {
@@ -36,6 +37,16 @@ public class DtoLancamento {
 		this.descricao = descricao;
 		this.dataHora = dataHora;
 		this.lancamentoTipo = lancamentoTipo;
+	}
+
+	public DtoLancamento(Lancamento lancamento) {
+		this.contaId = lancamento.getConta().getId();
+		this.contaDestinoId = lancamento.getContaDestino().getId();
+		this.planoContaId = lancamento.getPlanoConta().getId();
+		this.valor = lancamento.getValor();
+		this.descricao = lancamento.getDescricao();
+		this.dataHora = lancamento.getDataHora();
+		this.lancamentoTipo = lancamento.getLancamentoTipo();
 	}
 
 	public Integer getContaId() {
