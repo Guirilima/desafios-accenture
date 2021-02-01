@@ -59,11 +59,8 @@ public class LancamentoService {
 		 List<DtoLancamento> listDtoLancamentos = new ArrayList<>();
 
 		for ( Lancamento lancamentoAtual : lancamentoRepository.findAllByContaId(idConta)) {
-
 			listDtoLancamentos.add(new DtoLancamento(lancamentoAtual));
-
 		}
-
 		return listDtoLancamentos;
 	}
 

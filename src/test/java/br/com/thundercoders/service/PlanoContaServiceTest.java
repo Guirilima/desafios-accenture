@@ -16,6 +16,7 @@ import br.com.thundercoders.repository.UsuarioRepository;
 @TestMethodOrder(OrderAnnotation.class)
 public class PlanoContaServiceTest {
 
+	private ContaService contaService;
 	private PlanoContaService planoContaService;
 	private PlanoContaRepository repository;
 	private UsuarioService usuarioService;

@@ -13,7 +13,9 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import br.com.thundercoders.model.ContaTipo;
 import br.com.thundercoders.model.Usuario;
+import br.com.thundercoders.model.dto.DtoUsuario;
 import br.com.thundercoders.repository.UsuarioRepository;
 
 @TestInstance(Lifecycle.PER_CLASS)

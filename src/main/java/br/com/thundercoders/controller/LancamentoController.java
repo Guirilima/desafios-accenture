@@ -5,6 +5,7 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -52,8 +53,8 @@ public class LancamentoController {
 	}
 
 	@GetMapping("porPeriodo/{idConta}")
-	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorPeriodoEConta(@PathVariable("idConta") Integer idConta, @RequestParam LocalDateTime dataInicial,
-																		  @RequestParam LocalDateTime dataFinal) {
+	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorPeriodoEConta(@PathVariable("idConta") Integer idConta,@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam LocalDateTime dataInicial,
+																				@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam LocalDateTime dataFinal) {
 
 		try {
 			return ResponseEntity.ok(lancamentoService.buscarPorPeriodoEIdConta(idConta,dataInicial,dataFinal));
