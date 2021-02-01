@@ -25,7 +25,7 @@ public class ConfigWeb extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/usuario/logar", "/usuario/*").permitAll().anyRequest().authenticated()
+		http.authorizeRequests().antMatchers("/usuario/logar", "/usuario/**").permitAll().anyRequest().authenticated()
 				.and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new JWTAuthorizationFilter(tokenService, jpaUserDetailService),
 						UsernamePasswordAuthenticationFilter.class);

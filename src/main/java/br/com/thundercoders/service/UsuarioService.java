@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.thundercoders.model.Conta;
@@ -19,12 +20,14 @@ public class UsuarioService implements UserDetailsService {
 
 	private UsuarioRepository usuarioRepository;
 	private ContaService contaService;
+	private BCryptPasswordEncoder pEnconder;
 
 	@Autowired
-	public UsuarioService(UsuarioRepository usuarioRepository, ContaService contaService) {
+	public UsuarioService(UsuarioRepository usuarioRepository, ContaService contaService, BCryptPasswordEncoder pEnconder) {
 
 		this.usuarioRepository = usuarioRepository;
 		this.contaService = contaService;
+		this.pEnconder = pEnconder;
 	}
 
 	public boolean loginComprimento(String login) {
@@ -58,6 +61,9 @@ public class UsuarioService implements UserDetailsService {
 	public Usuario save(DtoUsuario dtoUsuario) {
 
 		Usuario usuario = dtoUsuario.converte();
+
+		usuario.setSenha( this.pEnconder.encode( usuario.getPassword() ));
+
 		Usuario usuarioSalvo = this.usuarioRepository.save(usuario);
 		Conta conta = dtoUsuario.getContaTipo().getConta();
 		conta.setUsuario(usuario);
