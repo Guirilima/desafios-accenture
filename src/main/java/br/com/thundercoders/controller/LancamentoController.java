@@ -2,6 +2,9 @@ package br.com.thundercoders.controller;
 
 import java.net.URI;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +18,7 @@ import br.com.thundercoders.service.LancamentoService;
 
 @RestController
 @RequestMapping("/lancamento")
+@Api(value= "lancamento-controller", tags = "Lançamento entre contas")
 public class LancamentoController {
 
 	private LancamentoService lancamentoService;
@@ -23,8 +27,10 @@ public class LancamentoController {
 		this.lancamentoService = lancamentoService;
 	}
 
+
 	@PostMapping
-	public ResponseEntity<DtoLancamento> salvarLancamento(@RequestBody DtoLancamento dtoLancamento,
+	@ApiOperation(value = "salva uma operação de lançamento no banco de dados")
+	public ResponseEntity<DtoLancamento> salvarLancamento(@ApiParam(value = "DtoLancamento", required = true)  @RequestBody DtoLancamento dtoLancamento,
 			UriComponentsBuilder uriBuilder) {
 
 		Lancamento lancamentoSalvo = lancamentoService.salvaLancamento(dtoLancamento);
